@@ -1,0 +1,71 @@
+/* ═══════════════════════════════════════════════════════════════
+   ESTILOS DE IMPRESIÓN / EXPORTAR PDF
+   ═══════════════════════════════════════════════════════════════ */
+
+@page {
+  size: 210mm 297mm;
+  margin: 0;
+}
+
+@media print {
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--color-bg-paper) !important;
+  }
+
+  /* Wrapper sin gaps ni padding al imprimir */
+  .page-wrapper {
+    padding: 0;
+    gap: 0;
+    display: block; /* Cambia de flex a block — flex puede generar espacio extra */
+  }
+
+  .page-label {
+    display: none;
+  }
+
+  /* Cada .a4 ocupa exactamente una hoja */
+  .a4 {
+    box-sizing: border-box;
+    width: 210mm;
+    height: 297mm;
+    overflow: hidden;
+    box-shadow: none !important;
+    break-after: page;        /* Estándar moderno */
+    page-break-after: always; /* Fallback */
+  }
+
+  /* CRÍTICO: el último .a4 NO genera página en blanco */
+  .a4:last-of-type {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  /* Revista: ajuste fino al imprimir */
+  .a4.revista {
+    padding: 8mm 14mm;
+  }
+
+  .magazine-title {
+    font-size: 28pt;
+  }
+
+  .magazine-intro {
+    margin-bottom: 3mm;
+    padding-bottom: 3mm;
+  }
+
+  .magazine-grid {
+    gap: 5mm;
+  }
+
+  .magazine-sidebar {
+    gap: 3mm;
+  }
+
+  .section-heading {
+    margin: 3mm 0 2mm 0;
+  }
+}

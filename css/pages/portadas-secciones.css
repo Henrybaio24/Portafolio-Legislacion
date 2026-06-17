@@ -1,0 +1,197 @@
+/* ═══════════════════════════════════════════════════════════════
+   PORTADA DE SECCIÓN — TODA OSCURA CON DEGRADADO
+   ═══════════════════════════════════════════════════════════════ */
+
+.a4.seccion {
+  background: linear-gradient(160deg, #2a1a18 0%, #1c1018 30%, #0e0b10 70%, #1a1418 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Franja dorada izquierda */
+.a4.seccion::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 6mm;
+  background: linear-gradient(180deg, #b8944c, #d4aa60, #b8944c, #8a6030);
+  z-index: 10;
+}
+
+/* Textura sutil */
+.a4.seccion::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(184,148,76,.03) 0px, rgba(184,148,76,.03) 1px, transparent 1px, transparent 50px),
+    repeating-linear-gradient(-45deg, rgba(184,148,76,.02) 0px, rgba(184,148,76,.02) 1px, transparent 1px, transparent 50px);
+  pointer-events: none;
+}
+
+/* ── CÍRCULOS DECORATIVOS DE FONDO ── */
+.section-circle-1 {
+  position: absolute;
+  width: 200mm; height: 200mm;
+  border: 1px solid rgba(184,148,76,.05);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.section-circle-2 {
+  position: absolute;
+  width: 160mm; height: 160mm;
+  border: 1px solid rgba(184,148,76,.04);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.section-circle-3 {
+  position: absolute;
+  width: 120mm; height: 120mm;
+  border: 1px solid rgba(184,148,76,.03);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Número gigante de fondo */
+.section-num-bg {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Cinzel', serif;
+  font-size: 200pt;
+  font-weight: 700;
+  color: rgba(184,148,76,.03);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+/* ── CONTENIDO CENTRADO ── */
+.section-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 5;
+  padding: 0 20mm 0 26mm;
+  text-align: center;
+}
+
+.section-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 7pt; font-weight: 600;
+  letter-spacing: .6em; color: rgba(184,148,76,.7);
+  text-transform: uppercase;
+  margin-bottom: 8mm;
+}
+
+.section-title-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 56pt;
+  line-height: 1;
+  color: #f5ede0;
+  letter-spacing: -.01em;
+}
+
+.section-title-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 28pt;
+  line-height: 1.15;
+  color: #b8944c;
+  margin-top: 4mm;
+}
+
+.section-line-top {
+  width: 30mm;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184,148,76,.4), transparent);
+  margin-bottom: 8mm;
+}
+
+.section-line-bottom {
+  width: 30mm;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184,148,76,.4), transparent);
+  margin-top: 8mm;
+}
+
+/* ── PIE OSCURO ── */
+.section-footer-bar {
+  padding: 4mm 12mm 5mm 18mm;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 5;
+  border-top: 1px solid rgba(184,148,76,.1);
+}
+.section-footer-left { display: flex; flex-direction: column; gap: 1px; }
+.section-footer-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 5pt; font-weight: 700;
+  letter-spacing: .3em; color: #b8944c;
+  text-transform: uppercase;
+}
+.section-footer-info {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 8pt; font-weight: 400;
+  color: rgba(240,225,200,.4);
+}
+.section-footer-right {
+  display: flex; align-items: center; gap: 8px;
+}
+.section-footer-num {
+  font-family: 'Cinzel', serif;
+  font-size: 20pt; font-weight: 700;
+  color: #d4aa60; line-height: 1;
+}
+.section-footer-label {
+  font-family: 'Cinzel', serif;
+  font-size: 5pt; font-weight: 600;
+  letter-spacing: .2em; color: rgba(184,148,76,.4);
+  text-transform: uppercase;
+}
+
+/* ── ICONO DATOS PERSONALES ── */
+.section-icon-area {
+  position: absolute;
+  top: 12mm;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3mm;
+  z-index: 6;
+}
+.section-icon-ring {
+  width: 80px; height: 80px;
+  border: 2px solid rgba(184,148,76,.5);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(184,148,76,.08);
+}
+.section-icon-ring svg {
+  width: 36px; height: 36px;
+  stroke: #b8944c;
+  opacity: .9;
+}
+.section-icon-label {
+  font-family: 'Cinzel', serif;
+  font-size: 7pt; font-weight: 700;
+  letter-spacing: .4em; color: #b8944c;
+  text-transform: uppercase;
+}

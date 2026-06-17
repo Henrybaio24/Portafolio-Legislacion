@@ -1,0 +1,14 @@
+body {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-burgundy);
+}
+
+.italic {
+  font-style: italic;
+}
+
+strong {
+  font-weight: 600;
+}

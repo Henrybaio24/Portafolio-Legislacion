@@ -1,0 +1,19 @@
+/* ═══════════════════════════════════════════════════════════════
+   COMPONENTE: HOJA A4
+   ═══════════════════════════════════════════════════════════════ */
+
+.a4 {
+  width: var(--a4-width);
+  height: var(--a4-height);
+  box-sizing: border-box; /* ← CLAVE: padding incluido en 297mm */
+  background: var(--color-bg-paper);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 50px 100px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.a4:last-child {
+  page-break-after: auto;
+}

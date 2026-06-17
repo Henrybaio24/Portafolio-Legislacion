@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio — Legislación Educativa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <base target="_blank">
+</head>
+<body>
+
+  <div class="toolbar">
+    <button class="btn btn-notebook" id="btnNotebook">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 4h7a2 2 0 0 1 2 2v14a1 1 0 0 0-1-1H2z"/><path d="M22 4h-7a2 2 0 0 0-2 2v14a1 1 0 0 1 1-1h8z"/></svg>
+      Modo Cuaderno
+    </button>
+    <button class="btn btn-print" onclick="printAll()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Guardar PDF Completo
+    </button>
+  </div>
+
+  <div class="page-wrapper">
+
+    <span class="page-label">Página 1 — Portada</span>
+    <div id="page-1"></div>
+
+    <span class="page-label">Página 2 — Índice</span>
+    <div id="page-2"></div>
+
+    <span class="page-label">Página 3 — Sección 1</span>
+    <div id="page-3"></div>
+
+    <span class="page-label">Página 4 — Documentos</span>
+    <div id="page-4"></div>
+
+    <span class="page-label">Página 5 — Sección 2</span>
+    <div id="page-5"></div>
+
+    <span class="page-label">Página 6 — Sección 2.1</span>
+    <div id="page-6"></div>
+
+    <span class="page-label">Página 7 — Sección 2.2</span>
+    <div id="page-7"></div>
+
+    <span class="page-label">Página 8 — Sección 2.3</span>
+    <div id="page-8"></div>
+
+    <span class="page-label">Página 9 — Sección 3</span>
+    <div id="page-9"></div>
+
+    <span class="page-label">Página 10 — Sección 3.1</span>
+    <div id="page-10"></div>
+
+    <span class="page-label">Página 11 — Sección 3.2</span>
+    <div id="page-11"></div>
+
+    <span class="page-label">Página 12 — Sección 3.3</span>
+    <div id="page-12"></div>
+
+    <span class="page-label">Página 13 — Sección 3.4</span>
+    <div id="page-13"></div>
+
+    <span class="page-label">Página 14 — Sección 4</span>
+    <div id="page-14"></div>
+
+    <span class="page-label">Página 15 — Sección 5</span>
+    <div id="page-15"></div>
+
+  </div>
+
+  <!-- Visor del Modo Cuaderno -->
+  <div class="notebook-overlay" id="notebookOverlay">
+
+    <!-- Barra superior compacta con todo los controles -->
+    <div class="notebook-topbar">
+      <div class="notebook-topbar-left">
+        <button class="notebook-close" id="notebookClose" aria-label="Cerrar modo cuaderno">✕</button>
+        <span class="notebook-page-label-top" id="notebookPageLabel"></span>
+      </div>
+      <div class="notebook-topbar-center">
+        <button class="notebook-nav" id="notebookPrev" aria-label="Página anterior">‹</button>
+        <span class="notebook-page-count" id="notebookPageCount"></span>
+        <button class="notebook-nav" id="notebookNext" aria-label="Página siguiente">›</button>
+      </div>
+    </div>
+
+    <!-- Stage: ocupa todo el espacio restante -->
+    <div class="notebook-stage">
+      <div class="notebook-book-wrap" id="notebookBookWrap">
+        <div class="notebook-spine"></div>
+        <div class="notebook-page-content" id="notebookPageContent"></div>
+        <div class="notebook-page-flip" id="notebookPageFlip"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+
+</body>
+</html>

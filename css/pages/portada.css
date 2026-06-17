@@ -1,0 +1,263 @@
+/* ═══════════════════════════════════════════════════════════════
+   PORTADA — CSS EXCLUSIVO
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── BLOQUE SUPERIOR OSCURO ── */
+.cover-top {
+  background: #1c1018;
+  height: 118mm;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.cover-top::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(184,148,76,.04) 0px, rgba(184,148,76,.04) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(-45deg, rgba(184,148,76,.03) 0px, rgba(184,148,76,.03) 1px, transparent 1px, transparent 40px);
+  pointer-events: none;
+}
+.cover-top::after {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 6mm;
+  background: linear-gradient(180deg, #b8944c, #8a6030, #b8944c);
+}
+
+.inst-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8mm 10mm 0 16mm;
+  flex-shrink: 0; position: relative; z-index: 2;
+}
+.inst-logo {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1.5px solid rgba(184,148,76,.6);
+  background: rgba(184,148,76,.08);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.inst-logo svg { width: 18px; height: 18px; stroke: #b8944c; }
+.inst-text { display: flex; flex-direction: column; gap: 1px; }
+.inst-univ {
+  font-family: var(--font-display);
+  font-size: 6pt; font-weight: 700;
+  letter-spacing: .3em; color: #b8944c; text-transform: uppercase;
+}
+.inst-faculty {
+  font-family: var(--font-serif);
+  font-size: 10pt; font-weight: 400;
+  color: rgba(240,225,200,.75); letter-spacing: .01em;
+}
+.inst-career {
+  font-family: var(--font-serif);
+  font-size: 9pt; font-weight: 300;
+  font-style: italic; color: rgba(184,148,76,.8);
+}
+
+.gold-rule {
+  display: flex; align-items: center; gap: 8px;
+  padding: 5mm 10mm 0 16mm; position: relative; z-index: 2;
+}
+.gold-rule-line { flex: 1; height: 1px; background: rgba(184,148,76,.35); }
+.gold-rule-diamond {
+  width: 5px; height: 5px;
+  background: #b8944c; transform: rotate(45deg); flex-shrink: 0;
+}
+
+.cover-label {
+  padding: 5mm 10mm 0 16mm; position: relative; z-index: 2;
+}
+.cover-label span {
+  font-family: var(--font-display);
+  font-size: 6pt; font-weight: 600;
+  letter-spacing: .55em; color: rgba(184,148,76,.65);
+  text-transform: uppercase;
+  border: 1px solid rgba(184,148,76,.25);
+  padding: 3px 10px; display: inline-block;
+}
+
+.cover-title {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 10mm 6mm 16mm; position: relative; z-index: 2;
+}
+.title-legislacion {
+  font-family: var(--font-serif);
+  font-weight: 700; font-size: 76pt;
+  line-height: .88; color: #f5ede0;
+  display: block; letter-spacing: -.01em;
+}
+.title-educativa {
+  font-family: var(--font-serif);
+  font-weight: 300; font-style: italic;
+  font-size: 62pt; line-height: .88;
+  color: #b8944c; display: block; letter-spacing: .01em;
+}
+
+.cover-bg-num {
+  position: absolute; right: -10mm; bottom: -8mm;
+  font-family: var(--font-display);
+  font-size: 200pt; font-weight: 700;
+  color: rgba(184,148,76,.04); line-height: 1;
+  pointer-events: none; z-index: 1; user-select: none;
+}
+
+
+/* ── BLOQUE INFERIOR OSCURO ── */
+.cover-bottom {
+  flex: 1;
+  background: #231820;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Franja dorada lateral — igual que cover-top */
+.cover-bottom::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 6mm;
+  background: linear-gradient(180deg, #b8944c, #8a6030, #b8944c);
+}
+
+/* Patrón de fondo sutil */
+.cover-bottom::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(184,148,76,.03) 0px, rgba(184,148,76,.03) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(-45deg, rgba(184,148,76,.02) 0px, rgba(184,148,76,.02) 1px, transparent 1px, transparent 40px);
+  pointer-events: none;
+}
+
+/* Marca de agua UCE */
+.watermark {
+  position: absolute; right: 6mm; top: 50%;
+  transform: translateY(-50%);
+  width: 52mm; opacity: .06;
+  pointer-events: none; z-index: 0;
+}
+
+/* ── TAGLINE ── */
+.tagline-area {
+  padding: 7mm 14mm 6mm 16mm;
+  border-bottom: 1px solid rgba(184,148,76,.15);
+  position: relative; z-index: 1;
+}
+.tagline-quote {
+  font-family: var(--font-display);
+  font-size: 6pt; font-weight: 700;
+  letter-spacing: .28em; color: #b8944c;
+  text-transform: uppercase;
+  margin: 0 0 5px;
+  display: flex; align-items: center; gap: 8px;
+}
+.tagline-quote::before {
+  content: '';
+  display: inline-block;
+  width: 18px; height: 1px; background: #b8944c;
+}
+.tagline-text {
+  font-family: var(--font-serif);
+  font-style: italic; font-weight: 300;
+  font-size: 11.5pt; color: rgba(240,225,200,.7);
+  line-height: 1.6; margin: 0;
+}
+
+/* ── DATA GRID ── */
+.data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0 14mm 0 16mm;
+  position: relative; z-index: 1;
+  flex: 1;
+}
+
+.data-cell {
+  padding: 5mm 8mm 5mm 0;
+  border-bottom: 1px solid rgba(184,148,76,.1);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.data-cell:nth-child(even) {
+  padding-left: 8mm;
+  padding-right: 0;
+  border-left: 1px solid rgba(184,148,76,.1);
+}
+.data-cell:nth-child(n+3) {
+  border-bottom: none;
+}
+
+.data-cell-label {
+  font-family: var(--font-display);
+  font-size: 5.5pt; font-weight: 700;
+  letter-spacing: .28em; color: #b8944c;
+  text-transform: uppercase; margin: 0;
+}
+.data-cell-label::before {
+  content: ''; display: inline-block;
+  width: 3px; height: 3px;
+  background: #b8944c; border-radius: 50%;
+  margin-right: 5px; vertical-align: middle; flex-shrink: 0;
+}
+
+.data-cell-value {
+  font-family: var(--font-serif);
+  font-weight: 600; font-size: 14pt;
+  color: #f5ede0; line-height: 1.15; margin: 0;
+}
+.data-cell-value.italic {
+  font-weight: 300; font-style: italic;
+  color: rgba(240,225,200,.6); font-size: 11.5pt;
+}
+
+
+/* ── FOOTER ── */
+.a4 .cover-footer {
+  padding: 0 14mm 0 16mm;
+  margin-top: auto;
+  position: relative; z-index: 1;
+}
+
+.a4 .footer-inner {
+  border-top: 1px solid rgba(184,148,76,.2);
+  padding: 3mm 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left { display: flex; flex-direction: column; gap: 1px; }
+
+.footer-tag {
+  font-family: var(--font-sans);
+  font-size: 5.5pt; font-weight: 600;
+  background: #b8944c; color: #1c1018;
+  padding: 1px 6px;
+  letter-spacing: .1em; text-transform: uppercase;
+  display: inline-block; width: fit-content;
+}
+
+.footer-info {
+  font-family: var(--font-sans);
+  font-size: 5.5pt; color: rgba(184,148,76,.5);
+  letter-spacing: .05em;
+}
+
+.footer-right { display: flex; align-items: center; gap: 5px; }
+
+.footer-page-label span {
+  font-family: var(--font-sans);
+  font-size: 5.5pt; color: rgba(184,148,76,.5);
+  letter-spacing: .12em; text-transform: uppercase;
+}
+
+.footer-page {
+  font-family: var(--font-display);
+  font-size: 10pt; font-weight: 700; color: #b8944c;
+}

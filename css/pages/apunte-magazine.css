@@ -1,0 +1,348 @@
+/* ═══════════════════════════════════════════════════════════════
+   ESTILO REVISTA / EDITORIAL — APUNTE
+   Usa variables de base/variables.css
+   ═══════════════════════════════════════════════════════════════ */
+
+.a4.revista {
+  background: var(--color-bg-paper);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 10mm 16mm;
+}
+
+
+/* ── ENCABEZADO EDITORIAL ── */
+
+.magazine-header {
+  border-bottom: 2px solid var(--color-burgundy);
+  padding-bottom: 4mm;
+  margin-bottom: 4mm;
+}
+
+.magazine-category {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2mm;
+}
+
+.magazine-dot {
+  width: 5px;
+  height: 5px;
+  background: var(--color-gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.magazine-category span:last-child {
+  font-family: var(--font-display);
+  font-size: 6.5pt;
+  font-weight: 700;
+  letter-spacing: .3em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+}
+
+.magazine-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 34pt;
+  line-height: 1.05;
+  color: var(--color-burgundy);
+  margin: 0 0 2mm 0;
+  letter-spacing: -.01em;
+}
+
+.magazine-subtitle {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 12pt;
+  color: var(--color-text-muted);
+  line-height: 1.35;
+  margin: 0;
+  max-width: 90%;
+}
+
+
+/* ── INTRODUCCIÓN ── */
+
+.magazine-intro {
+  font-family: var(--font-serif);
+  font-size: 11pt;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0 0 5mm 0;
+  padding-bottom: 4mm;
+  border-bottom: 1px solid rgba(184, 148, 76, .2);
+}
+
+
+/* ── REJILLA PRINCIPAL (Texto + Sidebar) ── */
+
+.magazine-grid {
+  display: grid;
+  grid-template-columns: 1fr 38mm;
+  gap: 8mm;
+  align-items: start;
+  flex: 1;
+}
+
+
+/* ── COLUMNA DE TEXTO — 2 columnas internas ── */
+
+.magazine-main {
+  font-family: var(--font-serif);
+  font-size: 10.5pt;
+  line-height: 1.55;
+  color: #2a1a20;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  column-count: 2;
+  column-gap: 6mm;
+  column-rule: 1px solid rgba(184, 148, 76, .2);
+}
+
+.magazine-main p {
+  margin-bottom: 3.5mm;
+  text-indent: 4mm;
+}
+
+.magazine-main p:first-of-type {
+  text-indent: 0;
+}
+
+/* Letra capital */
+.drop-cap {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 4.2rem;
+  line-height: 0.75;
+  margin-right: 1.5mm;
+  margin-top: 1.5mm;
+  color: var(--color-gold);
+  font-weight: 700;
+}
+
+/* Subtítulos de sección — atraviesan las 2 columnas */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: 8.5pt;
+  font-weight: 700;
+  letter-spacing: .25em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  margin: 5mm 0 2.5mm 0;
+  padding-bottom: 1.5mm;
+  border-bottom: 1px solid rgba(184, 148, 76, .3);
+  column-span: all;
+  text-indent: 0 !important;
+}
+
+
+/* ── BARRA LATERAL ── */
+
+.magazine-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+}
+
+/* Imagen */
+.magazine-figure {
+  margin: 0;
+  break-inside: avoid;
+}
+
+.magazine-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid rgba(184, 148, 76, .3);
+  display: block;
+}
+
+.img-caption {
+  font-family: var(--font-sans);
+  font-size: 6.5pt;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-top: 2mm;
+  line-height: 1.3;
+  border-left: 2px solid var(--color-gold);
+  padding-left: 2mm;
+}
+
+/* Cita destacada */
+.pull-quote {
+  background: var(--color-burgundy);
+  color: #f5ede0;
+  padding: 4mm;
+  position: relative;
+  break-inside: avoid;
+}
+
+.quote-mark {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--color-gold);
+  position: absolute;
+  top: 1mm;
+  left: 2mm;
+  opacity: 0.4;
+}
+
+.pull-quote p {
+  font-family: var(--font-serif);
+  font-size: 10pt;
+  font-style: italic;
+  line-height: 1.4;
+  margin-bottom: 3mm;
+  position: relative;
+  z-index: 1;
+  color: #f5ede0;
+  text-indent: 0 !important;
+}
+
+.quote-source {
+  font-family: var(--font-sans);
+  font-size: 6pt;
+  font-weight: 600;
+  letter-spacing: .15em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  display: block;
+  text-align: right;
+}
+
+/* Caja de lista — Sistemas del mundo */
+.sidebar-box-custom {
+  background: rgba(184, 148, 76, .05);
+  border: 1px solid rgba(184, 148, 76, .25);
+  padding: 3.5mm;
+  break-inside: avoid;
+}
+
+.sidebar-title-custom {
+  font-family: var(--font-display);
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: .2em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  margin: 0 0 2.5mm 0;
+  padding-bottom: 1.5mm;
+  border-bottom: 1px solid rgba(184, 148, 76, .25);
+}
+
+.sidebar-list-custom {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-list-custom li {
+  font-family: var(--font-sans);
+  font-size: 7pt;
+  color: #3a2e28;
+  line-height: 1.5;
+  margin-bottom: 2.5mm;
+  padding-left: 5px;
+  border-left: 2px solid rgba(184, 148, 76, .4);
+}
+
+.sidebar-list-custom li:last-child {
+  margin-bottom: 0;
+}
+
+.sidebar-list-custom li strong {
+  color: var(--color-burgundy);
+  font-weight: 600;
+  display: block;
+}
+
+
+/* ── NOTA AL PIE EDITORIAL (opcional) ── */
+
+.editorial-footnote {
+  font-family: var(--font-serif);
+  font-size: 8pt;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--color-text-muted);
+  text-align: center;
+  border-top: 1px solid rgba(184, 148, 76, .2);
+  padding-top: 3mm;
+  margin-top: 2mm;
+  letter-spacing: .05em;
+}
+
+
+/* ── FOOTER ── */
+
+.a4.revista .cover-footer {
+  padding: 0;
+  margin-top: auto;
+  width: 100%;
+}
+
+.a4.revista .footer-inner {
+  border-top: 1px solid rgba(184, 148, 76, .3);
+  padding-top: 3.5mm;
+  padding-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.footer-tag {
+  font-family: var(--font-sans);
+  font-size: 5.5pt;
+  font-weight: 600;
+  background: var(--color-burgundy);
+  color: #f5ede0;
+  padding: 1px 5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  display: inline-block;
+  width: fit-content;
+}
+
+.footer-info {
+  font-family: var(--font-sans);
+  font-size: 5.5pt;
+  color: var(--color-text-muted);
+  letter-spacing: .05em;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.footer-page-label span {
+  font-family: var(--font-sans);
+  font-size: 5.5pt;
+  color: var(--color-text-muted);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.footer-page {
+  font-family: var(--font-display);
+  font-size: 10pt;
+  font-weight: 700;
+  color: var(--color-gold);
+}

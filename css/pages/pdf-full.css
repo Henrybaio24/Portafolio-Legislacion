@@ -1,0 +1,120 @@
+/* pdf-full-revista.css - Estilos de apunte1 aplicados a estructura pdf-full */
+
+/* Fondo y tipografía base igual que revista */
+.a4.pdf-full {
+  background: #faf7f2;
+  font-family: 'Inter', sans-serif;
+  color: #1c1018;
+}
+
+/* HEADER con estilo revista */
+.pdf-header-compact {
+  padding: 10mm 16mm 6mm;
+  background: transparent;
+  border-bottom: none;
+}
+
+.pdf-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 7pt;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #b8944c;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4mm;
+}
+
+.pdf-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 36pt;
+  line-height: 1;
+  color: #1c1018;
+  margin: 0;
+}
+
+/* Subtítulo opcional (si lo agregas) */
+.pdf-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 14pt;
+  line-height: 1.3;
+  color: #5a2a34;
+  margin-top: 2mm;
+}
+
+/* BANDA DORADA (agregar en HTML si quieres) */
+.pdf-full .divider-band {
+  margin: 0 16mm;
+}
+
+/* PDF container con estilo revista */
+.pdf-container {
+  flex: 1;
+  margin: 4mm 12mm;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  position: relative;
+}
+
+.pdf-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* PIE DE PÁGINA - ya tienes .cover-footer, solo aseguramos colores */
+.pdf-full .cover-footer {
+  padding: 0 12mm 0 16mm;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.pdf-full .footer-inner {
+  border-top: 2px solid #1c1018;
+  padding: 4mm 0 5mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pdf-full .footer-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 5pt;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  color: #b8944c;
+  text-transform: uppercase;
+}
+
+.pdf-full .footer-info {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 8.5pt;
+  font-weight: 400;
+  color: #6a5a50;
+}
+
+.pdf-full .footer-page {
+  font-family: 'Cinzel', serif;
+  font-size: 18pt;
+  font-weight: 700;
+  color: #1c1018;
+  line-height: 1;
+}
+
+.pdf-full .footer-page-label {
+  font-family: 'Cinzel', serif;
+  font-size: 5pt;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: #a89070;
+  text-transform: uppercase;
+}

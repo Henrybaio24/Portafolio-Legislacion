@@ -1,0 +1,58 @@
+.toolbar {
+  position: fixed;
+  top: 1.4rem;
+  right: 1.4rem;
+  display: flex;
+  gap: 0.6rem;
+  z-index: 50;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border: none;
+}
+
+.btn-print {
+  background: #162018;
+  color: #8ecfb0;
+  border: 1px solid rgba(100, 180, 140, 0.35);
+}
+
+.btn-print:hover {
+  background: #1e2e22;
+  transform: translateY(-1px);
+}
+
+.btn-notebook {
+  background: #1c1420;
+  color: #d9b06a;
+  border: 1px solid rgba(184, 148, 76, 0.4);
+}
+
+.btn-notebook:hover {
+  background: #271a30;
+  transform: translateY(-1px);
+}
+
+.btn-notebook.active {
+  background: var(--color-gold);
+  color: #1c1018;
+  border-color: var(--color-gold);
+}
+
+@media print {
+  .toolbar {
+    display: none !important;
+  }
+}

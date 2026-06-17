@@ -1,0 +1,16 @@
+:root {
+  --color-bg-dark: #0e0b10;
+  --color-bg-paper: #faf7f2;
+  --color-gold: #b8944c;
+  --color-gold-light: #d4aa60;
+  --color-gold-dark: #6b4a1a;
+  --color-burgundy: #1c1018;
+  --color-burgundy-light: #5a2a34;
+  --color-text-muted: #6a5a50;
+  --color-text-light: #a89070;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-display: 'Cinzel', serif;
+  --font-sans: 'Inter', sans-serif;
+  --a4-width: 210mm;
+  --a4-height: 297mm;
+}

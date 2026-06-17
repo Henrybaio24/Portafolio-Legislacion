@@ -1,0 +1,23 @@
+.divider-band {
+  height: 8mm;
+  background: linear-gradient(90deg, var(--color-gold-dark), var(--color-gold), var(--color-gold-light), var(--color-gold), var(--color-gold-dark));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.divider-band-text {
+  font-family: var(--font-display);
+  font-size: 5.5pt;
+  font-weight: 700;
+  letter-spacing: 0.6em;
+  color: #2a1a08;
+  text-transform: uppercase;
+}
+
+.divider-star {
+  color: #2a1a08;
+  font-size: 7pt;
+}
