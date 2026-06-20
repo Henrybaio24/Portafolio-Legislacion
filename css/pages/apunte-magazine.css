@@ -92,6 +92,80 @@
 }
 
 
+/* ── CUERPO A UNA SOLA COLUMNA (sin sidebar) ── */
+
+.magazine-full {
+  flex: 1;
+  padding: 0 0.3rem;
+}
+
+.magazine-main-full {
+  font-family: var(--font-serif);
+  font-size: 10.5pt;
+  line-height: 1.65;
+  color: #2a1a20;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.magazine-main-full .section-heading {
+  column-span: initial;
+  margin-top: 5mm;
+  margin-bottom: 3mm;
+}
+
+.magazine-main-full .section-heading:first-child {
+  margin-top: 0;
+}
+
+.magazine-main-full p {
+  margin-bottom: 4mm;
+  text-indent: 0;
+}
+
+.magazine-main-full p:last-child {
+  margin-bottom: 0;
+}
+
+.magazine-figure-full {
+  margin: 0 0 4.5mm 0;
+  break-inside: avoid;
+  display: flex;
+  justify-content: center;
+  padding: 8mm;
+  position: relative;
+}
+
+.magazine-figure-full::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 62mm;
+  height: 62mm;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(184, 148, 76, .16) 0%, rgba(184, 148, 76, .07) 45%, transparent 72%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.magazine-img-full {
+  width: auto;
+  max-width: 55%;
+  max-height: 55mm;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  filter:
+    drop-shadow(0 1px 2px rgba(80, 50, 20, .12))
+    drop-shadow(0 14px 22px rgba(80, 50, 20, .22));
+}
+
+
 /* ── COLUMNA DE TEXTO — 2 columnas internas ── */
 
 .magazine-main {
