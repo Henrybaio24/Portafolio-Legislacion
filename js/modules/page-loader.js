@@ -24,6 +24,12 @@ async function loadPage(url, containerId) {
 
     const a4 = doc.querySelector('.a4');
     if (a4) {
+      a4.querySelectorAll('img').forEach(img => {
+        const src = img.getAttribute('src');
+        if (src && src.startsWith('../')) {
+          img.setAttribute('src', src.replace(/^\.\.\//, ''));
+        }
+      });
       document.getElementById(containerId).innerHTML = a4.outerHTML;
     }
   } catch (err) {
