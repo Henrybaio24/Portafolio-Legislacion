@@ -1,9 +1,8 @@
-// notebook.js - Modo Cuaderno
-// Convierte el portafolio (vista de scroll) en un libro hojeable página por página,
-// con animación de "pasar de hoja" y navegación por flechas, teclado y swipe.
+// notebook.js - Modo Cuaderno (rediseño realista)
 
 const NATURAL_W = 793.7008; // 210mm a 96dpi
 const NATURAL_H = 1122.5197; // 297mm a 96dpi
+const RING_COUNT = 14; // anillas de espiral
 
 let pages = [];
 let current = 0;
@@ -17,8 +16,6 @@ function capturePages() {
   const a4s = Array.from(wrapper.querySelectorAll('.a4'));
 
   pages = a4s.map((a4, i) => {
-    // Clonamos y quitamos los botones de zoom ya inyectados:
-    // así el observer del lightbox les vuelve a poner uno funcional dentro del cuaderno.
     const clone = a4.cloneNode(true);
     clone.querySelectorAll('.lightbox-zoom-btn').forEach(btn => btn.remove());
     return {
@@ -26,6 +23,18 @@ function capturePages() {
       html: clone.outerHTML
     };
   });
+}
+
+function buildRings() {
+  // Genera las anillas metálicas dinámicamente según la altura disponible
+  els.spine.innerHTML = '';
+  const h = els.bookWrap.clientHeight;
+  const count = Math.max(6, Math.min(RING_COUNT, Math.floor(h / 68)));
+  for (let i = 0; i < count; i++) {
+    const ring = document.createElement('div');
+    ring.className = 'notebook-spine-ring';
+    els.spine.appendChild(ring);
+  }
 }
 
 function fitToStage() {
@@ -66,6 +75,7 @@ function showCurrent() {
   if (!pages.length) return;
   const scale = fitToStage();
   renderInto(els.content, pages[current].html, scale);
+  buildRings();
   updateChrome();
 }
 
@@ -96,12 +106,9 @@ function flip(direction) {
     renderInto(front, pages[targetIndex].html, scale);
   }
 
-  // La página real de destino ya queda lista debajo, así al terminar la
-  // animación no hay parpadeo: el flip y el fondo coinciden.
   renderInto(els.content, pages[targetIndex].html, scale);
 
   flipEl.style.display = 'block';
-  // Forzamos reflow para que el navegador registre el estado inicial antes de animar
   void flipEl.offsetWidth;
   flipEl.classList.add(direction > 0 ? 'flip-next' : 'flip-prev');
 
@@ -171,16 +178,17 @@ function initNotebook() {
   initialized = true;
 
   els = {
-    overlay: document.getElementById('notebookOverlay'),
+    overlay:  document.getElementById('notebookOverlay'),
     bookWrap: document.getElementById('notebookBookWrap'),
-    content: document.getElementById('notebookPageContent'),
-    flip: document.getElementById('notebookPageFlip'),
-    label: document.getElementById('notebookPageLabel'),
-    count: document.getElementById('notebookPageCount'),
-    prev: document.getElementById('notebookPrev'),
-    next: document.getElementById('notebookNext'),
-    close: document.getElementById('notebookClose'),
-    openBtn: document.getElementById('btnNotebook'),
+    content:  document.getElementById('notebookPageContent'),
+    flip:     document.getElementById('notebookPageFlip'),
+    spine:    document.querySelector('.notebook-spine'),
+    label:    document.getElementById('notebookPageLabel'),
+    count:    document.getElementById('notebookPageCount'),
+    prev:     document.getElementById('notebookPrev'),
+    next:     document.getElementById('notebookNext'),
+    close:    document.getElementById('notebookClose'),
+    openBtn:  document.getElementById('btnNotebook'),
   };
 
   if (!els.overlay || !els.openBtn) return;
