@@ -12,7 +12,7 @@ async function loadPage(url, containerId) {
     pageLinks.forEach(link => {
       let href = link.getAttribute('href');
       // Convertir ../css/ → css/
-      href = href.replace(/^\.\.\//, '');
+      href = href.replace(/^(\.\.\/)+/, '');
       // Solo agregar si no existe ya
       if (!document.querySelector(`link[href="${href}"]`)) {
         const newLink = document.createElement('link');
@@ -27,7 +27,7 @@ async function loadPage(url, containerId) {
       a4.querySelectorAll('img').forEach(img => {
         const src = img.getAttribute('src');
         if (src && src.startsWith('../')) {
-          img.setAttribute('src', src.replace(/^\.\.\//, ''));
+          img.setAttribute('src', src.replace(/^(\.\.\/)+/, ''));
         }
       });
       document.getElementById(containerId).innerHTML = a4.outerHTML;
