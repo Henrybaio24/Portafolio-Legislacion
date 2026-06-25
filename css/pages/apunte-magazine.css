@@ -8,7 +8,16 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 10mm 16mm;
+  padding: 10mm 16mm 18mm 16mm;
+}
+
+.a4.revista .cover-footer {
+  position: absolute;
+  bottom: 0;
+  left: 16mm;
+  right: 16mm;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 
@@ -88,7 +97,8 @@
   grid-template-columns: 1fr 38mm;
   gap: 8mm;
   align-items: start;
-  flex: 1;
+  flex: 1 1 0;
+  min-height: 0;
 }
 
 
@@ -139,10 +149,6 @@
   padding-left: 4mm;
   margin-bottom: 2.5mm;
   text-indent: 0;
-}
-
-.magazine-main-full p + ul {
-  margin-top: -3mm;
 }
 
 .magazine-main-full ul li::before {
@@ -208,6 +214,7 @@
   column-count: 2;
   column-gap: 6mm;
   column-rule: 1px solid rgba(184, 148, 76, .2);
+  align-self: stretch;   /* ← estira la columna de texto */
 }
 
 .magazine-main p {
@@ -253,6 +260,7 @@
   display: flex;
   flex-direction: column;
   gap: 5mm;
+  align-self: stretch;   /* ← estira el sidebar también */
 }
 
 /* Imagen */
@@ -385,70 +393,6 @@
   letter-spacing: .05em;
 }
 
-
-/* ── FOOTER ── */
-
-.a4.revista .cover-footer {
-  padding: 0;
-  margin-top: auto;
-  width: 100%;
-}
-
-.a4.revista .footer-inner {
-  border-top: 1px solid rgba(184, 148, 76, .3);
-  padding-top: 3.5mm;
-  padding-bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer-left {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
-.footer-tag {
-  font-family: var(--font-sans);
-  font-size: 5.5pt;
-  font-weight: 600;
-  background: var(--color-burgundy);
-  color: #f5ede0;
-  padding: 1px 5px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  display: inline-block;
-  width: fit-content;
-}
-
-.footer-info {
-  font-family: var(--font-sans);
-  font-size: 5.5pt;
-  color: var(--color-text-muted);
-  letter-spacing: .05em;
-}
-
-.footer-right {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.footer-page-label span {
-  font-family: var(--font-sans);
-  font-size: 5.5pt;
-  color: var(--color-text-muted);
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-.footer-page {
-  font-family: var(--font-display);
-  font-size: 10pt;
-  font-weight: 700;
-  color: var(--color-gold);
-}
 
 /* ── TABLA DE DOCUMENTOS REGLAMENTARIOS (QR) ── */
 

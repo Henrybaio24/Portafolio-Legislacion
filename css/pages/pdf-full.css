@@ -5,6 +5,7 @@
   background: #faf7f2;
   font-family: 'Inter', sans-serif;
   color: #1c1018;
+  padding-bottom: 18mm;
 }
 
 /* HEADER con estilo revista */
@@ -53,7 +54,7 @@
 /* PDF container con estilo revista */
 .pdf-container {
   flex: 1;
-  margin: 4mm 12mm;
+  margin: 4mm 12mm 0 12mm;
   background: #fff;
   border-radius: 4px;
   overflow: hidden;
@@ -66,55 +67,18 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 97%;
   border: none;
 }
 
-/* PIE DE PÁGINA - ya tienes .cover-footer, solo aseguramos colores */
-.pdf-full .cover-footer {
-  padding: 0 12mm 0 16mm;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 1;
+.a4.pdf-full .cover-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.pdf-full .footer-inner {
-  border-top: 2px solid #1c1018;
-  padding: 4mm 0 5mm;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
-.pdf-full .footer-tag {
-  font-family: 'Cinzel', serif;
-  font-size: 5pt;
-  font-weight: 700;
-  letter-spacing: 0.4em;
-  color: #b8944c;
-  text-transform: uppercase;
-}
 
-.pdf-full .footer-info {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 8.5pt;
-  font-weight: 400;
-  color: #6a5a50;
-}
 
-.pdf-full .footer-page {
-  font-family: 'Cinzel', serif;
-  font-size: 18pt;
-  font-weight: 700;
-  color: #1c1018;
-  line-height: 1;
-}
 
-.pdf-full .footer-page-label {
-  font-family: 'Cinzel', serif;
-  font-size: 5pt;
-  font-weight: 600;
-  letter-spacing: 0.25em;
-  color: #a89070;
-  text-transform: uppercase;
-}

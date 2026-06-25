@@ -217,14 +217,14 @@
 }
 
 
-/* ── FOOTER ── */
-.a4 .cover-footer {
+/* ── FOOTER (exclusivo de portada) ── */
+.cover-bottom .cover-footer {
   padding: 0 14mm 0 16mm;
   margin-top: auto;
   position: relative; z-index: 1;
 }
 
-.a4 .footer-inner {
+.cover-bottom .footer-inner {
   border-top: 1px solid rgba(184,148,76,.2);
   padding: 3mm 0;
   display: flex;
@@ -232,9 +232,9 @@
   align-items: center;
 }
 
-.footer-left { display: flex; flex-direction: column; gap: 1px; }
+.cover-bottom .footer-left { display: flex; flex-direction: column; gap: 1px; }
 
-.footer-tag {
+.cover-bottom .footer-tag {
   font-family: var(--font-sans);
   font-size: 5.5pt; font-weight: 600;
   background: #b8944c; color: #1c1018;
@@ -243,21 +243,21 @@
   display: inline-block; width: fit-content;
 }
 
-.footer-info {
+.cover-bottom .footer-info {
   font-family: var(--font-sans);
   font-size: 5.5pt; color: rgba(184,148,76,.5);
   letter-spacing: .05em;
 }
 
-.footer-right { display: flex; align-items: center; gap: 5px; }
+.cover-bottom .footer-right { display: flex; align-items: center; gap: 5px; }
 
-.footer-page-label span {
+.cover-bottom .footer-page-label span {
   font-family: var(--font-sans);
   font-size: 5.5pt; color: rgba(184,148,76,.5);
   letter-spacing: .12em; text-transform: uppercase;
 }
 
-.footer-page {
+.cover-bottom .footer-page {
   font-family: var(--font-display);
   font-size: 10pt; font-weight: 700; color: #b8944c;
 }

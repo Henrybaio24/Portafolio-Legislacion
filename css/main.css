@@ -7,7 +7,6 @@
 @import 'components/toolbar.css';
 @import 'components/notebook.css';
 @import 'components/divider-band.css';
-@import 'components/footer.css';
 @import 'components/lightbox.css';
 @import 'pages/portada.css';
 @import 'pages/apunte-magazine.css';
@@ -15,3 +14,4 @@
 @import 'pages/documentos.css';
 @import 'pages/portadas-secciones.css';
 @import 'pages/pdf-full.css';
+@import 'components/footer.css';

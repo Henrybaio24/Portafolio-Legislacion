@@ -34,6 +34,7 @@ const pages = [
   { url: 'views/anexos/filosofia_carr1.html', label: 'Sección 5.4.1' },
   { url: 'views/anexos/filosofia_carr2.html', label: 'Sección 5.4.2' },
   { url: 'views/anexos/filosofia_carr3.html', label: 'Sección 5.4.3' },
+  { url: 'views/portadas/referencias.html', label: 'Sección 6' },
 ];
 
 // Genera el id de contenedor automáticamente (page-1, page-2, ...)
