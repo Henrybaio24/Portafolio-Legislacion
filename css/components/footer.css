@@ -1,9 +1,9 @@
 .cover-footer {
-  padding: 0 12mm 5mm 16mm;
+  padding: 0;
   flex-shrink: 0;
   position: relative;
   z-index: 1;
-  margin-top: auto; /* ← esto es todo */
+  margin-top: auto;
 }
 
 .footer-inner {

@@ -23,5 +23,5 @@
    ═══════════════════════════════════════════════════════════════ */
 
 .a4.revista {
-  padding-bottom: 20mm;   /* ← AGREGADO: espacio para el footer absolute */
+  padding: 8mm 14mm 18mm 14mm;
 }
