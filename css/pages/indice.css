@@ -48,7 +48,7 @@
   width: 100%;
 }
 .index-header-title {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-serif);
   font-weight: 700;
   font-size: 36pt;
   line-height: 1;
@@ -56,7 +56,7 @@
   letter-spacing: -0.01em;
 }
 .index-header-subtitle {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-serif);
   font-weight: 300;
   font-style: italic;
   font-size: 14pt;
@@ -90,7 +90,7 @@
   z-index: 1;
 }
 .index-intro {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-serif);
   font-style: italic;
   font-weight: 300;
   font-size: 11pt;
@@ -113,7 +113,7 @@
   border-bottom: none;
 }
 .index-num {
-  font-family: "Cinzel", serif;
+  font-family: var(--font-display);
   font-size: 10pt;
   font-weight: 700;
   color: #b8944c;
@@ -128,13 +128,13 @@
   top: -2px;
 }
 .index-topic {
-  font-family: "Cormorant Garamond", serif;
+  font-family: var(--font-serif);
   font-weight: 600;
   font-size: 12pt;
   color: #1c1418;
 }
 .index-page {
-  font-family: "Cinzel", serif;
+  font-family: var(--font-display);
   font-size: 10pt;
   font-weight: 700;
   color: #b8944c;
@@ -142,63 +142,28 @@
   text-align: right;
 }
 
-.index-footer {
-  padding: 0 14mm 5mm 18mm;
-  flex-shrink: 0;
+/* FIX: Posicionamiento del footer en índice */
+#a4-indice {
   position: relative;
-  z-index: 1;
-}
-.index-footer-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(135deg, #1c1018 0%, #2a1a20 100%);
-  border-radius: 6px;
-  padding: 3.5mm 5mm;
-  border: 1px solid rgba(184, 148, 76, 0.2);
-}
-.index-footer-left {
   display: flex;
   flex-direction: column;
-  gap: 1px;
 }
-.index-footer-tag {
-  font-family: "Cinzel", serif;
-  font-size: 5pt;
-  font-weight: 700;
-  letter-spacing: 0.35em;
-  color: #b8944c;
-  text-transform: uppercase;
+
+#a4-indice .index-body {
+  flex: 1;
 }
-.index-footer-info {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 8pt;
-  font-weight: 400;
-  color: rgba(240, 225, 200, 0.6);
+
+#a4-indice .cover-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-left: 14mm;
+  padding-right: 14mm;
 }
-.index-footer-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-left: 4mm;
-  border-left: 1px solid rgba(184, 148, 76, 0.2);
-}
-.index-footer-page {
-  font-family: "Cinzel", serif;
-  font-size: 20pt;
-  font-weight: 700;
-  color: #d4aa60;
-  line-height: 1;
-}
-.index-footer-label {
-  font-family: "Cinzel", serif;
-  font-size: 5pt;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  color: rgba(184, 148, 76, 0.5);
-  text-transform: uppercase;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  text-align: right;
-}
+
+/* ═══════════════════════════════════════════════════════════════
+   ← ELIMINADO: .index-footer (ahora usa .cover-footer global)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* El footer ahora usa .cover-footer de components/footer.css */

@@ -7,6 +7,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 }
 
 /* ── HEADER OSCURO COMPACTO ── */
@@ -47,7 +48,7 @@
 }
 
 .doc-header-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-serif);
   font-weight: 700;
   font-size: 26pt;
   line-height: 1;
@@ -56,7 +57,7 @@
 }
 
 .doc-header-num {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-display);
   font-size: 14pt;
   font-weight: 700;
   color: rgba(184,148,76,.5);
@@ -114,7 +115,7 @@
 }
 
 .doc-card-title {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-display);
   font-size: 6.5pt; font-weight: 700;
   letter-spacing: .2em; color: #b8944c;
   text-transform: uppercase;
@@ -163,7 +164,7 @@
 }
 
 .doc-placeholder-text {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-serif);
   font-style: italic;
   font-weight: 300;
   font-size: 11pt;
@@ -173,7 +174,7 @@
 }
 
 .doc-placeholder-hint {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   font-size: 7pt;
   color: #c0b0a0;
   letter-spacing: .05em;
@@ -188,20 +189,26 @@
 }
 
 .doc-card-label {
-  font-family: 'Cinzel', serif;
+  font-family: var(--font-display);
   font-size: 5pt; font-weight: 600;
   letter-spacing: .15em; color: #b8944c;
   text-transform: uppercase;
 }
 
 .doc-card-desc {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-serif);
   font-size: 9pt;
   font-weight: 400;
   color: #6a5a50;
   margin-top: 1px;
 }
 
+/* FIX: Footer posicionado correctamente */
 .a4.documentos .cover-footer {
-  margin-top: auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-left: 14mm;
+  padding-right: 14mm;
 }

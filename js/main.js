@@ -37,6 +37,7 @@ const pages = [
   { url: 'views/trabajos/trabajo4.html', label: 'Sección 3.4' },
   { url: 'views/trabajos/trabajo5.html', label: 'Sección 3.5' },
   { url: 'views/portadas/evaluaciones.html', label: 'Sección 4' },
+  { url: 'views/otros/prueba1.html', label: 'Sección 4.1' },
   { url: 'views/portadas/anexos.html', label: 'Sección 5' },
   { url: 'views/anexos/silabo.html', label: 'Sección 5.1' },
   { url: 'views/anexos/filosofia.html', label: 'Sección 5.2' },
@@ -67,9 +68,81 @@ function renderPageSlots() {
 
 renderPageSlots();
 
-// Carga todas las páginas y luego inicializa el lightbox
+// Carga todas las páginas y luego inicializa numeración, índice y lightbox
 Promise.all(
   pagesWithContainer.map(p => loadPage(p.url, p.container))
 ).then(() => {
+  let pageCounter = 0;    // Cuenta TODAS las páginas en orden (portadas incluidas)
+  let sectionCounter = 0; // Cuenta solo las portadas de sección
+  const tocEntries = [];  // Aquí guardamos los datos para el índice
+
+  pagesWithContainer.forEach((p) => {
+    const container = document.getElementById(p.container);
+    if (!container) return;
+
+    pageCounter++;
+    const formattedPage = String(pageCounter).padStart(2, '0');
+
+    // --- Caso 1: páginas de contenido (apuntes, trabajos, anexos, documentos) ---
+    const footerPage = container.querySelector('.footer-page');
+    if (footerPage) {
+      footerPage.textContent = formattedPage;
+    }
+
+    // --- Caso 2: portadas de sección ---
+    const sectionNumBg = container.querySelector('.section-num-bg');
+    const sectionFooterNum = container.querySelector('.section-footer-num');
+
+    if (sectionNumBg || sectionFooterNum) {
+      sectionCounter++;
+      const formattedSection = String(sectionCounter).padStart(2, '0');
+
+      if (sectionNumBg) sectionNumBg.textContent = formattedSection;
+      if (sectionFooterNum) sectionFooterNum.textContent = formattedPage;
+
+      // Extrae el título real de la portada (sin tocar nada a mano)
+      const titleEl = container.querySelector('.section-title-main');
+      const topic = titleEl
+        ? titleEl.textContent.replace(/\s+/g, ' ').trim()
+        : p.label;
+
+      tocEntries.push({
+        num: formattedSection,
+        topic,
+        page: formattedPage,
+        targetId: p.container,
+      });
+    }
+  });
+
+  // --- Construye el índice dinámicamente con datos reales ---
+  const indexList = document.querySelector('.index-list');
+  if (indexList) {
+    indexList.innerHTML = tocEntries
+      .map(
+        (entry) => `
+        <li class="index-item" data-target="${entry.targetId}">
+          <span class="index-num">${entry.num}</span>
+          <span class="index-dots"></span>
+          <span class="index-topic">${entry.topic}</span>
+          <span class="index-dots"></span>
+          <span class="index-page">${entry.page}</span>
+        </li>
+      `
+      )
+      .join('');
+
+    // Click en cualquier entrada del índice -> navega a esa sección
+    indexList.querySelectorAll('.index-item').forEach((item) => {
+      item.style.cursor = 'pointer';
+      item.addEventListener('click', () => {
+        const target = document.getElementById(item.dataset.target);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  }
+
   initLightbox();
 });

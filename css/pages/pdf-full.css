@@ -1,9 +1,9 @@
-/* pdf-full-revista.css - Estilos de apunte1 aplicados a estructura pdf-full */
+/* pdf-full.css - Estilos de apunte1 aplicados a estructura pdf-full */
 
 /* Fondo y tipografía base igual que revista */
 .a4.pdf-full {
   background: #faf7f2;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   color: #1c1018;
   padding-bottom: 18mm;
 }
@@ -16,7 +16,7 @@
 }
 
 .pdf-tag {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   font-size: 7pt;
   font-weight: 600;
   letter-spacing: 0.15em;
@@ -27,7 +27,7 @@
 }
 
 .pdf-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-serif);
   font-weight: 700;
   font-size: 36pt;
   line-height: 1;
@@ -37,7 +37,7 @@
 
 /* Subtítulo opcional (si lo agregas) */
 .pdf-subtitle {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: var(--font-serif);
   font-weight: 400;
   font-style: italic;
   font-size: 14pt;
@@ -78,7 +78,6 @@
   right: 0;
 }
 
-
-
-
-
+.pdf-container-no-margin {
+  margin: 4mm 0 0 0 !important;
+}
