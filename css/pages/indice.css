@@ -167,3 +167,48 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* El footer ahora usa .cover-footer de components/footer.css */
+
+.toc-sidebar {
+  position: fixed;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.95);
+  border-left: 3px solid #c9a84c;
+  padding: 8px 0;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 100;
+  width: 180px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+
+.toc-item {
+  display: flex;
+  gap: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 11px;
+  color: #555;
+  line-height: 1.3;
+  transition: background 0.2s;
+}
+
+.toc-item:hover {
+  background: #f5f0e8;
+  color: #222;
+}
+
+.toc-item.active {
+  background: #f5f0e8;
+  color: #c9a84c;
+  font-weight: 600;
+  border-left: 2px solid #c9a84c;
+}
+
+.toc-num {
+  min-width: 18px;
+  font-weight: 700;
+  color: #c9a84c;
+}

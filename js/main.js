@@ -1,15 +1,10 @@
 // main.js - Punto de entrada de la aplicación
 import { loadPage } from './modules/page-loader.js';
-import { printAll } from './modules/printer.js';
 import { initLightbox } from './modules/lightbox.js';
 import { initNotebook } from './modules/notebook.js';
 
-window.printAll = printAll;
 initNotebook();
 
-// ⚠️ ÚNICO lugar que tienes que tocar al agregar una página nueva:
-// solo agrega un objeto con url y label. El número de página y el
-// id del contenedor se generan automáticamente según la posición.
 const pages = [
   { url: 'views/portadas/portada.html', label: 'Portada' },
   { url: 'views/otros/indice.html', label: 'Índice' },
@@ -49,13 +44,11 @@ const pages = [
   { url: 'views/portadas/referencias.html', label: 'Sección 6' },
 ];
 
-// Genera el id de contenedor automáticamente (page-1, page-2, ...)
 const pagesWithContainer = pages.map((p, i) => ({
   ...p,
   container: `page-${i + 1}`,
 }));
 
-// Construye el HTML del wrapper (las etiquetas + los divs vacíos)
 function renderPageSlots() {
   const wrapper = document.getElementById('pageWrapper');
   wrapper.innerHTML = pagesWithContainer
@@ -68,13 +61,21 @@ function renderPageSlots() {
 
 renderPageSlots();
 
-// Carga todas las páginas y luego inicializa numeración, índice y lightbox
+// --- Botón ir al inicio ---
+const btnTop = document.getElementById('btnTop');
+window.addEventListener('scroll', () => {
+  btnTop.classList.toggle('visible', window.scrollY > 400);
+});
+btnTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
 Promise.all(
   pagesWithContainer.map(p => loadPage(p.url, p.container))
 ).then(() => {
-  let pageCounter = 0;    // Cuenta TODAS las páginas en orden (portadas incluidas)
-  let sectionCounter = 0; // Cuenta solo las portadas de sección
-  const tocEntries = [];  // Aquí guardamos los datos para el índice
+  let pageCounter = 0;
+  let sectionCounter = 0;
+  const tocEntries = [];
 
   pagesWithContainer.forEach((p) => {
     const container = document.getElementById(p.container);
@@ -83,13 +84,9 @@ Promise.all(
     pageCounter++;
     const formattedPage = String(pageCounter).padStart(2, '0');
 
-    // --- Caso 1: páginas de contenido (apuntes, trabajos, anexos, documentos) ---
     const footerPage = container.querySelector('.footer-page');
-    if (footerPage) {
-      footerPage.textContent = formattedPage;
-    }
+    if (footerPage) footerPage.textContent = formattedPage;
 
-    // --- Caso 2: portadas de sección ---
     const sectionNumBg = container.querySelector('.section-num-bg');
     const sectionFooterNum = container.querySelector('.section-footer-num');
 
@@ -100,7 +97,6 @@ Promise.all(
       if (sectionNumBg) sectionNumBg.textContent = formattedSection;
       if (sectionFooterNum) sectionFooterNum.textContent = formattedPage;
 
-      // Extrae el título real de la portada (sin tocar nada a mano)
       const titleEl = container.querySelector('.section-title-main');
       const topic = titleEl
         ? titleEl.textContent.replace(/\s+/g, ' ').trim()
@@ -115,34 +111,143 @@ Promise.all(
     }
   });
 
-  // --- Construye el índice dinámicamente con datos reales ---
+  // --- Índice de página ---
   const indexList = document.querySelector('.index-list');
   if (indexList) {
-    indexList.innerHTML = tocEntries
-      .map(
-        (entry) => `
-        <li class="index-item" data-target="${entry.targetId}">
-          <span class="index-num">${entry.num}</span>
-          <span class="index-dots"></span>
-          <span class="index-topic">${entry.topic}</span>
-          <span class="index-dots"></span>
-          <span class="index-page">${entry.page}</span>
-        </li>
-      `
-      )
-      .join('');
+    indexList.innerHTML = tocEntries.map(entry => `
+      <li class="index-item" data-target="${entry.targetId}">
+        <span class="index-num">${entry.num}</span>
+        <span class="index-dots"></span>
+        <span class="index-topic">${entry.topic}</span>
+        <span class="index-dots"></span>
+        <span class="index-page">${entry.page}</span>
+      </li>
+    `).join('');
 
-    // Click en cualquier entrada del índice -> navega a esa sección
-    indexList.querySelectorAll('.index-item').forEach((item) => {
+    indexList.querySelectorAll('.index-item').forEach(item => {
       item.style.cursor = 'pointer';
       item.addEventListener('click', () => {
-        const target = document.getElementById(item.dataset.target);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        document.getElementById(item.dataset.target)
+          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
   }
 
   initLightbox();
+
+  // --- Restaura posición al recargar ---
+  const savedScroll = localStorage.getItem('scrollPos');
+  if (savedScroll) window.scrollTo(0, parseInt(savedScroll));
+  window.addEventListener('scroll', () => {
+    localStorage.setItem('scrollPos', window.scrollY);
+  });
+
+  // --- TOC lateral ---
+  const tocList = document.getElementById('tocList');
+  if (tocList) {
+    tocList.innerHTML = tocEntries.map(entry => `
+      <li class="toc-item" data-target="${entry.targetId}">
+        <span class="toc-num">${entry.num}</span>
+        <span class="toc-topic">${entry.topic}</span>
+      </li>
+    `).join('');
+
+    tocList.querySelectorAll('.toc-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.getElementById(item.dataset.target)
+          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    const tocObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          tocList.querySelectorAll('.toc-item').forEach(i => i.classList.remove('active'));
+          const active = tocList.querySelector(`[data-target="${entry.target.id}"]`);
+          active?.classList.add('active');
+          active?.scrollIntoView({ block: 'nearest' });
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px' });
+
+    tocEntries.forEach(entry => {
+      const el = document.getElementById(entry.targetId);
+      if (el) tocObserver.observe(el);
+    });
+  }
+
+  // --- Carrusel de imágenes ---
+  const carouselOverlay = document.getElementById('carouselOverlay');
+  const carouselImg = document.getElementById('carouselImg');
+  const carouselCaption = document.getElementById('carouselCaption');
+  const carouselClose = document.getElementById('carouselClose');
+  const carouselPrev = document.getElementById('carouselPrev');
+  const carouselNext = document.getElementById('carouselNext');
+  const carouselCounter = document.getElementById('carouselCounter');
+
+  // Recopila imágenes de los apuntes
+  const images = [];
+  pagesWithContainer
+    .filter(p => p.url.includes('apuntes/'))
+    .forEach(p => {
+      const container = document.getElementById(p.container);
+      if (!container) return;
+      container.querySelectorAll('img').forEach(img => {
+        images.push({
+          src: img.src,
+          alt: img.alt || '',
+          caption: img.closest('figure')?.querySelector('figcaption')?.textContent || ''
+        });
+      });
+    });
+
+  let currentIndex = 0;
+
+  function openCarousel(index) {
+    currentIndex = index;
+    updateCarousel();
+    carouselOverlay.classList.add('active');
+    btnTop.classList.remove('visible');
+  }
+
+  function updateCarousel() {
+    const img = images[currentIndex];
+    carouselImg.src = img.src;
+    carouselImg.alt = img.alt;
+    carouselCaption.textContent = img.caption || '';
+    carouselCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateCarousel();
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateCarousel();
+  }
+
+  // Botón galería -> abre carrusel directo
+  const btnGallery = document.getElementById('btnGallery');
+  btnGallery.addEventListener('click', () => openCarousel(0));
+
+  carouselPrev.addEventListener('click', prevSlide);
+  carouselNext.addEventListener('click', nextSlide);
+
+  carouselClose.addEventListener('click', () => {
+    carouselOverlay.classList.remove('active');
+    btnTop.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (carouselOverlay.classList.contains('active')) {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'Escape') {
+        carouselOverlay.classList.remove('active');
+        btnTop.classList.toggle('visible', window.scrollY > 400);
+      }
+    }
+  });
 });
