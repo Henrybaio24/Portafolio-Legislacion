@@ -3,12 +3,14 @@
 const NATURAL_W = 793.7008; // 210mm a 96dpi
 const NATURAL_H = 1122.5197; // 297mm a 96dpi
 const RING_COUNT = 14; // anillas de espiral
+const HINT_DELAY = 3000; // ms antes de mostrar el aviso
 
 let pages = [];
 let current = 0;
 let animating = false;
 let els = {};
 let initialized = false;
+let hintTimeout = null;
 
 function capturePages() {
   const wrapper = document.querySelector('.page-wrapper');
@@ -26,7 +28,6 @@ function capturePages() {
 }
 
 function buildRings() {
-  // Genera las anillas metálicas dinámicamente según la altura disponible
   els.spine.innerHTML = '';
   const h = els.bookWrap.clientHeight;
   const count = Math.max(6, Math.min(RING_COUNT, Math.floor(h / 68)));
@@ -144,6 +145,14 @@ function handleTouchEnd(e) {
   touchStartX = null;
 }
 
+function showHint() {
+  if (els.hint) els.hint.classList.add('visible');
+}
+
+function hideHint() {
+  if (els.hint) els.hint.classList.remove('visible');
+}
+
 function openNotebook() {
   capturePages();
   if (!pages.length) return;
@@ -153,6 +162,10 @@ function openNotebook() {
   els.overlay.classList.add('active');
   showCurrent();
   window.addEventListener('resize', showCurrent);
+
+  hideHint();
+  clearTimeout(hintTimeout);
+  hintTimeout = setTimeout(showHint, HINT_DELAY);
 }
 
 function closeNotebook() {
@@ -163,6 +176,9 @@ function closeNotebook() {
   els.flip.innerHTML = '';
   els.flip.style.display = 'none';
   window.removeEventListener('resize', showCurrent);
+
+  clearTimeout(hintTimeout);
+  hideHint();
 }
 
 function toggleNotebook() {
@@ -171,6 +187,26 @@ function toggleNotebook() {
   } else {
     openNotebook();
   }
+}
+
+function buildHint() {
+  const hint = document.createElement('div');
+  hint.className = 'notebook-hint';
+  hint.innerHTML = `
+    <div class="notebook-hint-icon">i</div>
+    <div class="notebook-hint-text">
+      <p>Si no visualizas bien el contenido en esta vista, vuelve a la vista general.</p>
+    </div>
+    <div class="notebook-hint-actions">
+      <button class="notebook-hint-btn" id="notebookHintBack">Vista general</button>
+      <button class="notebook-hint-dismiss" id="notebookHintClose" aria-label="Cerrar aviso">✕</button>
+    </div>
+  `;
+  els.overlay.appendChild(hint);
+  els.hint = hint;
+
+  hint.querySelector('#notebookHintBack').addEventListener('click', closeNotebook);
+  hint.querySelector('#notebookHintClose').addEventListener('click', hideHint);
 }
 
 function initNotebook() {
@@ -192,6 +228,8 @@ function initNotebook() {
   };
 
   if (!els.overlay || !els.openBtn) return;
+
+  buildHint();
 
   els.openBtn.addEventListener('click', toggleNotebook);
   els.close.addEventListener('click', closeNotebook);

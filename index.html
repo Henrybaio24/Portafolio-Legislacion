@@ -41,6 +41,62 @@
     <ul class="toc-list" id="tocList"></ul>
   </nav>
 
+  <div class="welcome-avatar" id="welcomeAvatar">
+    <button class="welcome-avatar-close" id="welcomeAvatarClose" aria-label="Cerrar">✕</button>
+
+    <div class="welcome-avatar-portrait">
+      <svg viewBox="0 0 256 256" class="avatar-svg">
+        <defs>
+          <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#e8c987" />
+            <stop offset="50%" stop-color="#c9a86a" />
+            <stop offset="100%" stop-color="#8a6a35" />
+          </linearGradient>
+          <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f7f1e3" />
+            <stop offset="100%" stop-color="#ede2c8" />
+          </linearGradient>
+          <clipPath id="circleClip">
+            <circle cx="128" cy="128" r="102" />
+          </clipPath>
+        </defs>
+
+        <circle cx="128" cy="128" r="110" fill="url(#ringGrad)" />
+        <circle cx="128" cy="128" r="103" fill="#fdfaf3" />
+
+        <g clip-path="url(#circleClip)" class="avatar-breathe">
+          <rect x="10" y="10" width="236" height="236" fill="url(#bgGrad)" />
+          <path d="M56 258 Q58 168 128 162 Q198 168 200 258 Z" fill="#2b2118" />
+          <path d="M74 258 Q76 180 128 176 Q180 180 182 258 Z" fill="#fdfaf3" />
+          <path d="M110 176 L128 206 L146 176 L136 168 L120 168 Z" fill="#8a1f1f" />
+          <path d="M98 171 Q128 186 158 171 L156 162 Q128 174 100 162 Z" fill="#2b2118" />
+          <circle cx="128" cy="106" r="52" fill="#e8bf95" />
+          <path d="M76 100 Q76 48 128 48 Q180 48 180 100 Q180 76 128 76 Q76 76 76 100Z" fill="#241a10" />
+          <path d="M78 94 Q72 96 74 114" stroke="#241a10" stroke-width="8" fill="none" stroke-linecap="round" />
+          <path d="M178 94 Q184 96 182 114" stroke="#241a10" stroke-width="8" fill="none" stroke-linecap="round" />
+          <path d="M96 86 Q128 66 160 86" stroke="#241a10" stroke-width="4" fill="none" stroke-linecap="round" />
+          <g class="avatar-blink">
+            <ellipse cx="111" cy="108" rx="4.5" ry="5.5" fill="#241a10" />
+            <ellipse cx="145" cy="108" rx="4.5" ry="5.5" fill="#241a10" />
+          </g>
+          <path d="M102 96 Q111 91 120 96" stroke="#241a10" stroke-width="2.4" fill="none" stroke-linecap="round" />
+          <path d="M136 96 Q145 91 154 96" stroke="#241a10" stroke-width="2.4" fill="none" stroke-linecap="round" />
+          <path d="M126 113 Q128 126 123 130" stroke="#c99b6e" stroke-width="2" fill="none" stroke-linecap="round" />
+          <g class="avatar-mouth">
+            <path d="M108 140 Q128 152 148 140" stroke="#7a3f2a" stroke-width="2.6" fill="none"
+              stroke-linecap="round" />
+          </g>
+        </g>
+
+        <circle cx="128" cy="128" r="103" fill="none" stroke="#8a6a35" stroke-width="1.5" />
+      </svg>
+    </div>
+
+    <div class="welcome-avatar-bubble">
+      <p>Bienvenido a mi portafolio.<br><strong>Mi nombre es Henry Montenegro.</strong></p>
+    </div>
+  </div>
+
   <div class="page-wrapper" id="pageWrapper">
 
   </div>
@@ -71,8 +127,6 @@
     </div>
 
   </div>
-
-
 
   <div class="carousel-overlay" id="carouselOverlay">
     <div class="carousel-topbar">

@@ -1,71 +1,113 @@
-/* ═══════════════════════════════════════════════════════════════
-   ESTILOS DE IMPRESIÓN / EXPORTAR PDF
-   ═══════════════════════════════════════════════════════════════ */
-
-@page {
-  size: 210mm 297mm;
-  margin: 0;
+.welcome-avatar {
+  position: fixed;
+  left: 24px;
+  top: 90px;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-@media print {
+.welcome-avatar.hidden-scroll {
+  opacity: 0;
+  transform: translateX(-30px);
+  pointer-events: none;
+}
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: var(--color-bg-paper) !important;
-  }
+.welcome-avatar-portrait {
+  width: 96px;
+  min-width: 96px;
+  border-radius: 50%;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.32));
+}
 
-  /* Wrapper sin gaps ni padding al imprimir */
-  .page-wrapper {
-    padding: 0;
-    gap: 0;
-    display: block; /* Cambia de flex a block — flex puede generar espacio extra */
-  }
+.avatar-svg { width: 100%; height: auto; display: block; overflow: visible; }
 
-  .page-label {
-    display: none;
-  }
+.avatar-breathe {
+  animation: avatarBreathe 4s ease-in-out infinite;
+  transform-origin: 128px 200px;
+}
+@keyframes avatarBreathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-1.5px) scale(1.008); }
+}
 
-  /* Cada .a4 ocupa exactamente una hoja */
-  .a4 {
-    box-sizing: border-box;
-    width: 210mm;
-    height: 297mm;
-    overflow: hidden;
-    box-shadow: none !important;
-    break-after: page;        /* Estándar moderno */
-    page-break-after: always; /* Fallback */
-  }
+.avatar-blink {
+  animation: avatarBlink 5s infinite;
+  transform-origin: 128px 108px;
+}
+@keyframes avatarBlink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  94%           { transform: scaleY(0.1); }
+}
 
-  /* CRÍTICO: el último .a4 NO genera página en blanco */
-  .a4:last-of-type {
-    break-after: avoid !important;
-    page-break-after: avoid !important;
-  }
+.avatar-mouth {
+  animation: avatarTalk 0.9s ease-in-out infinite;
+  transform-origin: 128px 143px;
+}
+@keyframes avatarTalk {
+  0%, 100% { transform: scaleY(1) scaleX(1); }
+  25%      { transform: scaleY(1.8) scaleX(0.9); }
+  50%      { transform: scaleY(0.6) scaleX(1.05); }
+  75%      { transform: scaleY(1.4) scaleX(0.95); }
+}
 
-  /* Revista: ajuste fino al imprimir */
-  .a4.revista {
-    padding: 8mm 14mm;
-  }
+.welcome-avatar-bubble {
+  background: #fdfaf3;
+  border: 1px solid #c9a86a;
+  border-radius: 4px 14px 14px 14px;
+  padding: 12px 16px;
+  max-width: 200px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #2b2118;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+  position: relative;
+  text-align: center;
+}
 
-  .magazine-title {
-    font-size: 28pt;
-  }
+.welcome-avatar-bubble::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 24px;
+  width: 14px;
+  height: 14px;
+  background: #fdfaf3;
+  border-left: 1px solid #c9a86a;
+  border-top: 1px solid #c9a86a;
+  transform: rotate(45deg);
+}
 
-  .magazine-intro {
-    margin-bottom: 3mm;
-    padding-bottom: 3mm;
-  }
+.welcome-avatar-bubble strong {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  color: #7a5c2e;
+}
 
-  .magazine-grid {
-    gap: 5mm;
-  }
+.welcome-avatar-close {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: none;
+  background: #2b2118;
+  color: #fdfaf3;
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
 
-  .magazine-sidebar {
-    gap: 3mm;
-  }
-
-  .section-heading {
-    margin: 3mm 0 2mm 0;
-  }
+@media (max-width: 640px) {
+  .welcome-avatar { left: 12px; top: 70px; }
+  .welcome-avatar-portrait { width: 72px; min-width: 72px; }
+  .welcome-avatar-bubble { max-width: 160px; font-size: 12px; padding: 10px 12px; }
 }

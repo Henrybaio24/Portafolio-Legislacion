@@ -5,6 +5,25 @@ import { initNotebook } from './modules/notebook.js';
 
 initNotebook();
 
+// --- Avatar de bienvenida ---
+const welcomeAvatar = document.getElementById('welcomeAvatar');
+
+document.getElementById('welcomeAvatarClose')?.addEventListener('click', () => {
+  welcomeAvatar.style.display = 'none';
+});
+
+let scrollTimeout;
+window.addEventListener('scroll', () => {
+  if (!welcomeAvatar || welcomeAvatar.style.display === 'none') return;
+
+  welcomeAvatar.classList.add('hidden-scroll');
+
+  clearTimeout(scrollTimeout);
+  scrollTimeout = setTimeout(() => {
+    welcomeAvatar.classList.remove('hidden-scroll');
+  }, 400);
+});
+
 const pages = [
   { url: 'views/portadas/portada.html', label: 'Portada' },
   { url: 'views/otros/indice.html', label: 'Índice' },
@@ -61,11 +80,28 @@ function renderPageSlots() {
 
 renderPageSlots();
 
-// --- Botón ir al inicio ---
+// --- Botón ir al inicio (solo en vista general) ---
 const btnTop = document.getElementById('btnTop');
-window.addEventListener('scroll', () => {
-  btnTop.classList.toggle('visible', window.scrollY > 400);
+const carouselOverlayEl = document.getElementById('carouselOverlay');
+
+function updateBtnTop() {
+  const overlayActive =
+    document.body.classList.contains('notebook-mode') ||
+    carouselOverlayEl.classList.contains('active');
+  btnTop.classList.toggle('visible', !overlayActive && window.scrollY > 400);
+}
+
+window.addEventListener('scroll', updateBtnTop);
+
+new MutationObserver(updateBtnTop).observe(document.body, {
+  attributes: true,
+  attributeFilter: ['class'],
 });
+new MutationObserver(updateBtnTop).observe(carouselOverlayEl, {
+  attributes: true,
+  attributeFilter: ['class'],
+});
+
 btnTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
