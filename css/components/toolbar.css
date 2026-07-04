@@ -56,3 +56,20 @@
     display: none !important;
   }
 }
+
+.notebook-topbar-right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.toolbar {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toolbar.toolbar-hidden {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+

@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   COMPONENTE: MODO CUADERNO — Rediseño realista
+   COMPONENTE: MODO CUADERNO → Formato revista (colores originales)
    ═══════════════════════════════════════════════════════════════ */
 
 body.notebook-mode {
@@ -14,7 +14,6 @@ body.notebook-mode {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  /* Fondo: textura de madera oscura con viñeta */
   background:
     radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.55) 0%, transparent 70%),
     radial-gradient(ellipse at 50% 0%,   rgba(0,0,0,0.45) 0%, transparent 65%),
@@ -155,77 +154,72 @@ body.notebook-mode {
   flex-shrink: 0;
   width: min(100%, calc((100vh - 6rem) * (210 / 297)));
   height: min(calc(100vh - 6rem), calc(100% * (297 / 210)));
-
-  /* Sombra de libro con páginas apiladas */
   filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8)) drop-shadow(0 8px 20px rgba(0,0,0,0.6));
 }
 
-/* Páginas apiladas detrás del libro (efecto grosor) */
+/* Páginas apiladas: más delgadas (formato revista, no libro grueso) */
 .notebook-book-wrap::before,
 .notebook-book-wrap::after {
   content: '';
   position: absolute;
-  top: 2px;
-  right: -3px;
-  bottom: -2px;
-  left: 3px;
+  top: 1px;
+  right: -2px;
+  bottom: -1px;
+  left: 2px;
   background: #f0ebe0;
-  border-radius: 1px 3px 3px 1px;
+  border-radius: 1px 2px 2px 1px;
   z-index: 0;
 }
 
 .notebook-book-wrap::after {
-  top: 4px;
-  right: -6px;
-  bottom: -4px;
-  left: 6px;
+  top: 2px;
+  right: -4px;
+  bottom: -2px;
+  left: 4px;
   background: #e8e2d5;
   z-index: -1;
 }
 
-/* ── Espiral (anillas de cuaderno) ───────────────────────── */
+/* ── Lomo: GRAPAS de revista en vez de espiral de anillas ──── */
 .notebook-spine {
   position: absolute;
-  left: -14px;
+  left: -5px;
   top: 0;
   bottom: 0;
-  width: 14px;
+  width: 8px;
   z-index: 30;
   pointer-events: none;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  padding: 18px 0;
+  justify-content: flex-start;
+  padding: 45px 0;
   gap: 0;
 }
 
-/* Generamos las anillas con un pseudo-elemento repetido usando SVG inline */
 .notebook-spine::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 6px,
-    rgba(90,60,20,0.0) 6px,
-    rgba(90,60,20,0.0) 8px
-  );
+  background: linear-gradient(to right, rgba(0,0,0,0.2), transparent);
 }
 
-/* Anillas individuales — las dibujamos con box-shadows escalonadas */
+/* Grapa metálica horizontal (formato revista), color plateado como grapa real */
 .notebook-spine-ring {
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  border: 2.5px solid #8b6914;
-  background: radial-gradient(circle at 35% 35%, #d4a84b, #7a5a10);
+  width: 7px;
+  height: 26px;
+  border-radius: 1px;
+  border: none;
+  background: linear-gradient(90deg, #7a6a4a, #d4c49a, #7a6a4a);
   box-shadow:
-    inset 0 1px 2px rgba(255,220,120,0.4),
-    inset 0 -1px 2px rgba(0,0,0,0.5),
-    0 1px 3px rgba(0,0,0,0.6);
+    inset 0 1px 1px rgba(255,240,200,0.4),
+    0 1px 2px rgba(0,0,0,0.6);
   flex-shrink: 0;
+  margin-bottom: 80px;
+}
+
+.notebook-spine-ring:last-child {
+  margin-bottom: 0;
 }
 
 /* ── Páginas ─────────────────────────────────────────────── */
@@ -234,14 +228,12 @@ body.notebook-mode {
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: 1px 3px 3px 1px;
+  border-radius: 1px 2px 2px 1px;
   overflow: hidden;
   background: #faf7f0;
-
-  /* Línea de encuadernación izquierda */
-  border-left: 3px solid rgba(184,120,40,0.25);
+  border-left: 1px solid rgba(184,120,40,0.15);
   box-shadow:
-    2px 0 6px rgba(0,0,0,0.12) inset,
+    1px 0 3px rgba(0,0,0,0.1) inset,
     0 0 0 1px rgba(0,0,0,0.08);
 }
 
@@ -254,15 +246,14 @@ body.notebook-mode {
   box-shadow: none !important;
 }
 
-/* Gradiente sutil en el borde derecho para dar sensación de curvatura */
 .notebook-page-content::after {
   content: '';
   position: absolute;
   top: 0;
   right: 0;
-  width: 18px;
+  width: 16px;
   height: 100%;
-  background: linear-gradient(to left, rgba(0,0,0,0.07), transparent);
+  background: linear-gradient(to left, rgba(0,0,0,0.06), transparent);
   pointer-events: none;
   z-index: 5;
 }
@@ -288,53 +279,28 @@ body.notebook-mode {
   transform: rotateY(180deg);
 }
 
-/* Sombra dinámica durante el volteo */
 .notebook-page-flip.flip-next {
-  animation: notebookFlipNext 0.72s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+  animation: notebookFlipNext 0.65s cubic-bezier(0.42, 0, 0.58, 1) forwards;
 }
 
 .notebook-page-flip.flip-prev {
-  animation: notebookFlipPrev 0.72s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+  animation: notebookFlipPrev 0.65s cubic-bezier(0.42, 0, 0.58, 1) forwards;
 }
 
 @keyframes notebookFlipNext {
-  0%   {
-    transform: rotateY(0deg);
-    box-shadow: 0 0 0 rgba(0,0,0,0);
-  }
-  30%  {
-    box-shadow: -20px 0 50px rgba(0,0,0,0.45), -4px 0 12px rgba(0,0,0,0.3);
-  }
-  50%  {
-    box-shadow: -30px 0 60px rgba(0,0,0,0.5), -6px 0 16px rgba(0,0,0,0.35);
-  }
-  70%  {
-    box-shadow: -15px 0 40px rgba(0,0,0,0.35);
-  }
-  100% {
-    transform: rotateY(-180deg);
-    box-shadow: 0 0 0 rgba(0,0,0,0);
-  }
+  0%   { transform: rotateY(0deg); box-shadow: 0 0 0 rgba(0,0,0,0); }
+  30%  { box-shadow: -18px 0 45px rgba(0,0,0,0.4), -4px 0 10px rgba(0,0,0,0.28); }
+  50%  { box-shadow: -26px 0 55px rgba(0,0,0,0.45), -6px 0 14px rgba(0,0,0,0.32); }
+  70%  { box-shadow: -13px 0 35px rgba(0,0,0,0.3); }
+  100% { transform: rotateY(-180deg); box-shadow: 0 0 0 rgba(0,0,0,0); }
 }
 
 @keyframes notebookFlipPrev {
-  0%   {
-    transform: rotateY(0deg);
-    box-shadow: 0 0 0 rgba(0,0,0,0);
-  }
-  30%  {
-    box-shadow: 20px 0 50px rgba(0,0,0,0.45), 4px 0 12px rgba(0,0,0,0.3);
-  }
-  50%  {
-    box-shadow: 30px 0 60px rgba(0,0,0,0.5), 6px 0 16px rgba(0,0,0,0.35);
-  }
-  70%  {
-    box-shadow: 15px 0 40px rgba(0,0,0,0.35);
-  }
-  100% {
-    transform: rotateY(180deg);
-    box-shadow: 0 0 0 rgba(0,0,0,0);
-  }
+  0%   { transform: rotateY(0deg); box-shadow: 0 0 0 rgba(0,0,0,0); }
+  30%  { box-shadow: 18px 0 45px rgba(0,0,0,0.4), 4px 0 10px rgba(0,0,0,0.28); }
+  50%  { box-shadow: 26px 0 55px rgba(0,0,0,0.45), 6px 0 14px rgba(0,0,0,0.32); }
+  70%  { box-shadow: 13px 0 35px rgba(0,0,0,0.3); }
+  100% { transform: rotateY(180deg); box-shadow: 0 0 0 rgba(0,0,0,0); }
 }
 
 /* ── Mobile ───────────────────────────────────────────────── */
@@ -355,20 +321,19 @@ body.notebook-mode {
     height: min(calc(100vh - 4.5rem), calc(100% * (297 / 210)));
   }
   .notebook-spine {
-    left: -11px;
-    width: 11px;
-    padding: 12px 0;
+    left: -4px;
+    width: 6px;
+    padding: 30px 0;
   }
   .notebook-spine-ring {
-    width: 10px;
-    height: 10px;
+    width: 6px;
+    height: 18px;
+    margin-bottom: 55px;
   }
 }
 
 @media print {
-  .notebook-overlay {
-    display: none !important;
-  }
+  .notebook-overlay { display: none !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -378,7 +343,6 @@ body.notebook-mode {
   }
 }
 
-/* ── Aviso de compatibilidad ─────────────────────────────── */
 /* ── Aviso de compatibilidad ─────────────────────────────── */
 .notebook-hint {
   position: absolute;
@@ -487,5 +451,80 @@ body.notebook-mode {
   }
   .notebook-hint.visible {
     transform: translateY(0);
+  }
+}
+
+/* ── Llamar la atención sobre los botones del toolbar ── */
+.btn-notebook,
+.btn-gallery {
+  position: relative;
+  animation: toolbarPulse 2.2s ease-in-out infinite;
+}
+
+.btn-notebook {
+  animation-delay: 0s;
+}
+
+.btn-gallery {
+  animation-delay: 0.4s;
+}
+
+@keyframes toolbarPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(212, 168, 75, 0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 14px rgba(212, 168, 75, 0.85);
+    transform: scale(1.05);
+  }
+}
+
+/* Anillo expansivo tipo notificación, igual que el ícono de GitHub */
+.btn-notebook::after,
+.btn-gallery::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid rgba(212, 168, 75, 0.7);
+  animation: toolbarRing 2.2s ease-out infinite;
+  pointer-events: none;
+}
+
+.btn-gallery::after {
+  animation-delay: 0.4s;
+}
+
+@keyframes toolbarRing {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+}
+
+/* Al pasar el mouse, se detiene la animación y se resalta más */
+.btn-notebook:hover,
+.btn-gallery:hover {
+  animation-play-state: paused;
+  transform: scale(1.08);
+}
+
+.btn-notebook:hover::after,
+.btn-gallery:hover::after {
+  animation-play-state: paused;
+}
+
+/* Accesibilidad: respeta la preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .btn-notebook,
+  .btn-gallery,
+  .btn-notebook::after,
+  .btn-gallery::after {
+    animation: none;
   }
 }

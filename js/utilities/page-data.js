@@ -1,0 +1,43 @@
+// Datos de todas las páginas del portafolio
+export const pages = [
+  { url: 'views/portadas/portada.html', label: 'Portada' },
+  { url: 'views/otros/indice.html', label: 'Índice' },
+  { url: 'views/portadas/datos_informativos.html', label: 'Sección 1' },
+  { url: 'views/otros/documentos.html', label: 'Documentos' },
+  { url: 'views/portadas/apuntes_diarios.html', label: 'Sección 2' },
+  { url: 'views/apuntes/apunte1.html', label: 'Sección 2.1' },
+  { url: 'views/apuntes/apunte2.html', label: 'Sección 2.2' },
+  { url: 'views/apuntes/apunte3.html', label: 'Sección 2.3' },
+  { url: 'views/apuntes/apunte4.html', label: 'Sección 2.4' },
+  { url: 'views/apuntes/apunte5.html', label: 'Sección 2.5' },
+  { url: 'views/apuntes/apunte6.html', label: 'Sección 2.6' },
+  { url: 'views/apuntes/apunte7.html', label: 'Sección 2.7' },
+  { url: 'views/apuntes/apunte8.html', label: 'Sección 2.8' },
+  { url: 'views/apuntes/apunte9.html', label: 'Sección 2.9' },
+  { url: 'views/apuntes/apunte10.html', label: 'Sección 2.10' },
+  { url: 'views/apuntes/apunte11.html', label: 'Sección 2.11' },
+  { url: 'views/apuntes/apunte12.html', label: 'Sección 2.12' },
+  { url: 'views/apuntes/apunte13.html', label: 'Sección 2.13' },
+  { url: 'views/apuntes/apunte14.html', label: 'Sección 2.14' },
+  { url: 'views/portadas/trabajos_individuales.html', label: 'Sección 3' },
+  { url: 'views/trabajos/trabajo1.html', label: 'Sección 3.1' },
+  { url: 'views/trabajos/trabajo2.html', label: 'Sección 3.2' },
+  { url: 'views/trabajos/trabajo3.html', label: 'Sección 3.3' },
+  { url: 'views/trabajos/trabajo4.html', label: 'Sección 3.4' },
+  { url: 'views/trabajos/trabajo5.html', label: 'Sección 3.5' },
+  { url: 'views/portadas/evaluaciones.html', label: 'Sección 4' },
+  { url: 'views/otros/prueba1.html', label: 'Sección 4.1' },
+  { url: 'views/portadas/anexos.html', label: 'Sección 5' },
+  { url: 'views/anexos/silabo.html', label: 'Sección 5.1' },
+  { url: 'views/anexos/filosofia.html', label: 'Sección 5.2' },
+  { url: 'views/anexos/filosofia_carr1.html', label: 'Sección 5.4.1' },
+  { url: 'views/anexos/filosofia_carr2.html', label: 'Sección 5.4.2' },
+  { url: 'views/anexos/filosofia_carr3.html', label: 'Sección 5.4.3' },
+  { url: 'views/portadas/referencias.html', label: 'Sección 6' },
+];
+
+// Genera contenedores con IDs únicos para cada página
+export const pagesWithContainer = pages.map((p, i) => ({
+  ...p,
+  container: `page-${i + 1}`,
+}));
