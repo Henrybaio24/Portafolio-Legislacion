@@ -34,6 +34,7 @@ export const pages = [
   { url: 'views/anexos/filosofia_carr2.html', label: 'Sección 5.4.2' },
   { url: 'views/anexos/filosofia_carr3.html', label: 'Sección 5.4.3' },
   { url: 'views/portadas/referencias.html', label: 'Sección 6' },
+  { url: 'views/otros/referenciasb.html', label: 'Sección 6.1' },
 ];
 
 // Genera contenedores con IDs únicos para cada página

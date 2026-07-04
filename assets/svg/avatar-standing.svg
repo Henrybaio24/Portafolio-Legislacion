@@ -1,0 +1,500 @@
+<svg viewBox="0 0 500 700" class="avatar-svg" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradiente piel -->
+    <linearGradient id="skinGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f5d0b0"/>
+      <stop offset="100%" stop-color="#e8b896"/>
+    </linearGradient>
+
+    <!-- Gradiente piel oscura (sombra) -->
+    <linearGradient id="skinGradDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8b896"/>
+      <stop offset="100%" stop-color="#d4a574"/>
+    </linearGradient>
+
+    <!-- Glow neón cian -->
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur"/>
+      <feFlood flood-color="#00d4ff" flood-opacity="0.8" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="shadow"/>
+      <feGaussianBlur in="shadow" stdDeviation="4" result="shadowBlur"/>
+      <feMerge>
+        <feMergeNode in="shadowBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Glow neón magenta -->
+    <filter id="neonGlowPink" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur"/>
+      <feFlood flood-color="#ff00ff" flood-opacity="0.7" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="shadow"/>
+      <feGaussianBlur in="shadow" stdDeviation="4" result="shadowBlur"/>
+      <feMerge>
+        <feMergeNode in="shadowBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Glow suave -->
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="5" result="blur"/>
+      <feFlood flood-color="#00d4ff" flood-opacity="0.4" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="shadow"/>
+      <feGaussianBlur in="shadow" stdDeviation="3" result="shadowBlur"/>
+      <feMerge>
+        <feMergeNode in="shadowBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Sombra suave -->
+    <filter id="dropShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+
+    <!-- Gradiente hoodie moderno -->
+    <linearGradient id="hoodieGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0f0f1a"/>
+    </linearGradient>
+
+    <!-- Gradiente monitor RGB -->
+    <linearGradient id="rgbGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ff00ff"/>
+      <stop offset="50%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#ff00ff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- SILLA GAMER RGB MODERNA                 -->
+  <!-- ═══════════════════════════════════════ -->
+  <g id="chair" filter="url(#dropShadow)">
+    <!-- Base -->
+    <ellipse cx="250" cy="640" rx="70" ry="12" fill="#0f0f1a"/>
+    <rect x="240" y="580" width="20" height="60" fill="#1a1a2e"/>
+    <!-- Ruedas -->
+    <circle cx="190" cy="645" r="8" fill="#2d2d44"/>
+    <circle cx="220" cy="650" r="8" fill="#2d2d44"/>
+    <circle cx="280" cy="650" r="8" fill="#2d2d44"/>
+    <circle cx="310" cy="645" r="8" fill="#2d2d44"/>
+    <!-- Patas -->
+    <path d="M250 620 L195 645" stroke="#1a1a2e" stroke-width="8" stroke-linecap="round"/>
+    <path d="M250 620 L220 650" stroke="#1a1a2e" stroke-width="8" stroke-linecap="round"/>
+    <path d="M250 620 L280 650" stroke="#1a1a2e" stroke-width="8" stroke-linecap="round"/>
+    <path d="M250 620 L305 645" stroke="#1a1a2e" stroke-width="8" stroke-linecap="round"/>
+    
+    <!-- Respaldo con detalles RGB -->
+    <rect x="170" y="280" width="160" height="220" rx="25" fill="#0f0f1a"/>
+    <rect x="180" y="290" width="140" height="200" rx="20" fill="#1a1a2e"/>
+    <!-- Líneas RGB en el respaldo -->
+    <line x1="185" y1="300" x2="185" y2="480" stroke="#00d4ff" stroke-width="2" opacity="0.6">
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite"/>
+    </line>
+    <line x1="315" y1="300" x2="315" y2="480" stroke="#ff00ff" stroke-width="2" opacity="0.6">
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" begin="1s" repeatCount="indefinite"/>
+    </line>
+    <!-- Costuras -->
+    <line x1="200" y1="300" x2="200" y2="480" stroke="#2d2d44" stroke-width="2" stroke-dasharray="8 4"/>
+    <line x1="250" y1="300" x2="250" y2="480" stroke="#2d2d44" stroke-width="2" stroke-dasharray="8 4"/>
+    <line x1="300" y1="300" x2="300" y2="480" stroke="#2d2d44" stroke-width="2" stroke-dasharray="8 4"/>
+    
+    <!-- Reposabrazos -->
+    <rect x="140" y="380" width="30" height="80" rx="12" fill="#0f0f1a"/>
+    <rect x="145" y="385" width="20" height="70" rx="8" fill="#1a1a2e"/>
+    <rect x="330" y="380" width="30" height="80" rx="12" fill="#0f0f1a"/>
+    <rect x="335" y="385" width="20" height="70" rx="8" fill="#1a1a2e"/>
+    
+    <!-- Asiento -->
+    <rect x="175" y="480" width="150" height="50" rx="15" fill="#0f0f1a"/>
+    <rect x="180" y="485" width="140" height="40" rx="12" fill="#1a1a2e"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- CUERPO COMPLETO (con respiración)       -->
+  <!-- ═══════════════════════════════════════ -->
+  <g id="fullBody" filter="url(#softGlow)">
+    <animateTransform attributeName="transform" type="translate"
+      values="0 0; 0 -1.5; 0 0" dur="3s" repeatCount="indefinite"/>
+
+    <!-- ═══════════ PIERNAS ═══════════ -->
+    <g id="legs">
+      <!-- Pierna izquierda -->
+      <path d="M210 480 L205 580 Q204 590 212 590 L228 590 Q232 590 232 580 L235 480 Z" fill="#0f0f1a"/>
+      <!-- Pierna derecha -->
+      <path d="M265 480 L268 580 Q269 590 277 590 L293 590 Q296 590 295 580 L290 480 Z" fill="#0f0f1a"/>
+      <!-- Rodillas -->
+      <ellipse cx="218" cy="530" rx="14" ry="10" fill="#0f0f1a"/>
+      <ellipse cx="282" cy="530" rx="14" ry="10" fill="#0f0f1a"/>
+      <!-- Zapatos modernos -->
+      <path d="M195 585 Q195 600 210 600 L230 600 Q240 600 240 585 L235 580 L200 580 Z" fill="#1a1a2e"/>
+      <path d="M260 585 Q260 600 275 600 L295 600 Q305 600 305 585 L300 580 L265 580 Z" fill="#1a1a2e"/>
+      <!-- Detalle neón en zapatos -->
+      <line x1="205" y1="590" x2="225" y2="590" stroke="#00d4ff" stroke-width="2" opacity="0.7">
+        <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" repeatCount="indefinite"/>
+      </line>
+      <line x1="270" y1="590" x2="290" y2="590" stroke="#ff00ff" stroke-width="2" opacity="0.7">
+        <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" begin="1s" repeatCount="indefinite"/>
+      </line>
+    </g>
+
+    <!-- ═══════════ TORSO / HOODIE TECH ═══════════ -->
+    <g id="torso">
+      <!-- Cuerpo base -->
+      <path d="M180 320 Q250 300 320 320 L340 490 L160 490 Z" fill="url(#hoodieGrad)"/>
+      <!-- Cuello hoodie -->
+      <ellipse cx="250" cy="315" rx="35" ry="12" fill="#1a1a2e"/>
+      <ellipse cx="250" cy="315" rx="28" ry="8" fill="#0f0f1a"/>
+      <!-- Cuello piel -->
+      <rect x="235" y="295" width="30" height="25" rx="8" fill="url(#skinGrad)"/>
+      
+      <!-- Hombros -->
+      <ellipse cx="195" cy="335" rx="28" ry="20" fill="url(#hoodieGrad)"/>
+      <ellipse cx="305" cy="335" rx="28" ry="20" fill="url(#hoodieGrad)"/>
+      
+      <!-- Bolsillo hoodie con detalle tech -->
+      <path d="M210 420 Q250 435 290 420 L285 460 Q250 470 215 460 Z" fill="#1a1a2e"/>
+      <line x1="220" y1="425" x2="220" y2="455" stroke="#2d2d44" stroke-width="1.5"/>
+      <line x1="280" y1="425" x2="280" y2="455" stroke="#2d2d44" stroke-width="1.5"/>
+      
+      <!-- Líneas tech en el hoodie -->
+      <path d="M200 350 L200 450" stroke="#00d4ff" stroke-width="1" opacity="0.3"/>
+      <path d="M300 350 L300 450" stroke="#ff00ff" stroke-width="1" opacity="0.3"/>
+      
+      <!-- Cordones -->
+      <path d="M240 320 Q235 350 242 380" stroke="#00d4ff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.8">
+        <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <path d="M260 320 Q265 350 258 380" stroke="#ff00ff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.8">
+        <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" begin="1s" repeatCount="indefinite"/>
+      </path>
+      <!-- Puntas cordones -->
+      <rect x="239" y="378" width="4" height="8" rx="2" fill="#00d4ff" opacity="0.9"/>
+      <rect x="257" y="378" width="4" height="8" rx="2" fill="#ff00ff" opacity="0.9"/>
+      
+      <!-- Logo moderno en el pecho -->
+      <circle cx="250" cy="380" r="14" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.8">
+        <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <text x="250" y="384" text-anchor="middle" fill="#00d4ff" font-family="Arial" font-size="10" font-weight="bold">HM</text>
+    </g>
+
+    <!-- ═══════════ BRAZO IZQUIERDO (en el teclado) ═══════════ -->
+    <g id="armLeft">
+      <animateTransform attributeName="transform" type="rotate"
+        values="0 180 340; 1 180 340; 0 180 340; -1 180 340; 0 180 340"
+        dur="4s" repeatCount="indefinite"/>
+      <!-- Hombro a codo -->
+      <path d="M180 340 Q155 380 160 420" stroke="url(#hoodieGrad)" stroke-width="30" fill="none" stroke-linecap="round"/>
+      <!-- Codo a muñeca -->
+      <path d="M160 420 Q165 450 185 455" stroke="url(#hoodieGrad)" stroke-width="26" fill="none" stroke-linecap="round"/>
+      <!-- Mano -->
+      <ellipse cx="188" cy="458" rx="14" ry="11" fill="url(#skinGrad)"/>
+      <!-- Dedos tipeando -->
+      <rect x="180" y="450" width="4" height="10" rx="2" fill="url(#skinGrad)">
+        <animate attributeName="y" values="450;448;450" dur="0.3s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="186" y="452" width="4" height="10" rx="2" fill="url(#skinGrad)">
+        <animate attributeName="y" values="452;449;452" dur="0.25s" begin="0.1s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="192" y="451" width="4" height="10" rx="2" fill="url(#skinGrad)">
+        <animate attributeName="y" values="451;448;451" dur="0.35s" begin="0.05s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+
+    <!-- ═══════════ BRAZO DERECHO (en el mouse) ═══════════ -->
+    <g id="armRight">
+      <animateTransform attributeName="transform" type="rotate"
+        values="0 320 340; 0.5 320 340; 0 320 340; -0.5 320 340; 0 320 340"
+        dur="3.5s" repeatCount="indefinite"/>
+      <!-- Hombro a codo -->
+      <path d="M320 340 Q345 380 340 420" stroke="url(#hoodieGrad)" stroke-width="30" fill="none" stroke-linecap="round"/>
+      <!-- Codo a muñeca -->
+      <path d="M340 420 Q335 450 315 455" stroke="url(#hoodieGrad)" stroke-width="26" fill="none" stroke-linecap="round"/>
+      <!-- Mano en mouse -->
+      <ellipse cx="312" cy="458" rx="14" ry="11" fill="url(#skinGrad)"/>
+      <rect x="305" y="450" width="4" height="10" rx="2" fill="url(#skinGrad)"/>
+      <rect x="311" y="452" width="4" height="10" rx="2" fill="url(#skinGrad)"/>
+      <rect x="317" y="451" width="4" height="10" rx="2" fill="url(#skinGrad)"/>
+    </g>
+
+    <!-- ═══════════════════════════════════════ -->
+    <!-- ═══════ TU CARA (IGUAL QUE ANTES) ═══════ -->
+    <!-- ═══════════════════════════════════════ -->
+    <g id="head">
+      <animateTransform attributeName="transform" type="rotate"
+        values="0 250 240; 1.5 250 240; 0 250 240; -1.5 250 240; 0 250 240"
+        dur="6s" repeatCount="indefinite"/>
+
+      <!-- Orejas -->
+      <ellipse cx="205" cy="245" rx="10" ry="14" fill="url(#skinGrad)"/>
+      <ellipse cx="295" cy="245" rx="10" ry="14" fill="url(#skinGrad)"/>
+
+      <!-- Cara -->
+      <rect x="210" y="195" width="80" height="95" rx="30" fill="url(#skinGrad)"/>
+      <rect x="215" y="200" width="70" height="35" rx="15" fill="url(#skinGrad)"/>
+
+      <!-- Sombra barbilla -->
+      <path d="M220 275 Q250 288 280 275" stroke="#d4a574" stroke-width="2" fill="none" opacity="0.4"/>
+      <!-- Mejillas -->
+      <ellipse cx="222" cy="255" rx="10" ry="6" fill="#e8a87c" opacity="0.2"/>
+      <ellipse cx="278" cy="255" rx="10" ry="6" fill="#e8a87c" opacity="0.2"/>
+
+      <!-- Nariz -->
+      <path d="M248 245 L245 258 L255 258 Z" fill="#d4a574" opacity="0.6"/>
+      <path d="M245 258 Q250 262 255 258" stroke="#c4956a" stroke-width="1.5" fill="none"/>
+
+      <!-- Cejas -->
+      <path d="M222 218 Q232 213 242 218" stroke="#2d3748" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M258 218 Q268 213 278 218" stroke="#2d3748" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+      <!-- OJOS con parpadeo -->
+      <g id="eyes">
+        <ellipse cx="232" cy="232" rx="9" ry="10" fill="#fff"/>
+        <circle cx="232" cy="232" r="5" fill="#2d3748"/>
+        <circle cx="234" cy="230" r="2" fill="#fff"/>
+        <rect x="222" y="221" width="20" height="22" fill="url(#skinGrad)" opacity="0">
+          <animate attributeName="opacity" values="0;0;0;1;0;0" keyTimes="0;0.88;0.92;0.94;0.96;1" dur="4s" repeatCount="indefinite"/>
+        </rect>
+
+        <ellipse cx="268" cy="232" rx="9" ry="10" fill="#fff"/>
+        <circle cx="268" cy="232" r="5" fill="#2d3748"/>
+        <circle cx="270" cy="230" r="2" fill="#fff"/>
+        <rect x="258" y="221" width="20" height="22" fill="url(#skinGrad)" opacity="0">
+          <animate attributeName="opacity" values="0;0;0;1;0;0" keyTimes="0;0.88;0.92;0.94;0.96;1" dur="4s" repeatCount="indefinite"/>
+        </rect>
+      </g>
+
+      <!-- Gafas -->
+      <g id="glasses">
+        <rect x="218" y="222" width="28" height="20" rx="6" fill="none" stroke="#2d3748" stroke-width="2.5"/>
+        <rect x="254" y="222" width="28" height="20" rx="6" fill="none" stroke="#2d3748" stroke-width="2.5"/>
+        <line x1="246" y1="232" x2="254" y2="232" stroke="#2d3748" stroke-width="2.5"/>
+        <line x1="218" y1="232" x2="205" y2="228" stroke="#2d3748" stroke-width="1.5"/>
+        <line x1="282" y1="232" x2="295" y2="228" stroke="#2d3748" stroke-width="1.5"/>
+        <line x1="222" y1="226" x2="230" y2="226" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
+        <line x1="258" y1="226" x2="266" y2="226" stroke="#fff" stroke-width="1.5" opacity="0.5"/>
+      </g>
+
+      <!-- Barba -->
+      <g id="beard">
+        <path d="M215 255 Q215 290 250 295 Q285 290 285 255 L285 245 Q285 275 250 280 Q215 275 215 245 Z" fill="#2d3748"/>
+        <path d="M235 265 Q250 260 265 265 Q265 272 250 270 Q235 272 235 265 Z" fill="#2d3748"/>
+        <rect x="245" y="258" width="10" height="8" rx="3" fill="#2d3748"/>
+        <path d="M240 285 Q250 290 260 285" stroke="#4a5568" stroke-width="1" fill="none" opacity="0.5"/>
+      </g>
+
+      <!-- BOCA (sonrisa animada) -->
+      <path d="M242 272 Q250 278 258 272" stroke="#c53030" stroke-width="2" fill="none" stroke-linecap="round">
+        <animate attributeName="d" values="M242 272 Q250 278 258 272; M242 272 Q250 281 258 272; M242 272 Q250 278 258 272" dur="2.4s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- PELO -->
+      <g id="hair">
+        <path d="M208 215 Q208 175 250 170 Q292 175 292 215 L292 200 Q292 165 250 160 Q208 165 208 200 Z" fill="#1a202c"/>
+        <path d="M212 185 Q225 178 250 180 Q275 178 288 185 Q275 192 250 188 Q225 192 212 185 Z" fill="#2d3748"/>
+        <rect x="205" y="195" width="8" height="30" rx="3" fill="#1a202c"/>
+        <rect x="287" y="195" width="8" height="30" rx="3" fill="#1a202c"/>
+        <path d="M235 165 L245 155 L255 165 L265 158 L270 168" stroke="#1a202c" stroke-width="6" fill="none" stroke-linecap="round"/>
+      </g>
+    </g>
+
+    <!-- ═══════════ GORRA (opcional, quita si no quieres) ═══════════ -->
+    <g id="cap" opacity="0">
+      <!-- Cambia opacity a 1 si quieres gorra -->
+      <path d="M205 175 Q250 150 295 175 L300 190 Q250 170 200 190 Z" fill="#1a1a2e"/>
+      <rect x="195" y="185" width="110" height="8" rx="4" fill="#0f0f1a"/>
+      <text x="250" y="182" text-anchor="middle" fill="#00d4ff" font-family="Arial" font-size="8" font-weight="bold" opacity="0.8">CODE</text>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ESCRITORIO GAMER MODERNO                -->
+  <!-- ═══════════════════════════════════════ -->
+  <g id="desk" filter="url(#dropShadow)">
+    <!-- Tabla -->
+    <rect x="80" y="520" width="340" height="15" rx="3" fill="#1a1a2e"/>
+    <rect x="80" y="535" width="340" height="8" rx="2" fill="#0f0f1a"/>
+    <!-- LED strip bajo el escritorio -->
+    <rect x="85" y="543" width="330" height="2" fill="url(#rgbGrad)" opacity="0.8">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <!-- Patas -->
+    <rect x="100" y="543" width="12" height="80" fill="#0f0f1a"/>
+    <rect x="388" y="543" width="12" height="80" fill="#0f0f1a"/>
+    <!-- Detalle moderno -->
+    <line x1="90" y1="528" x2="410" y2="528" stroke="#2d2d44" stroke-width="1" opacity="0.5"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- LAPTOP GAMER MODERNO                    -->
+  <!-- ═══════════════════════════════════════ -->
+  <g id="laptop">
+    <!-- Base -->
+    <rect x="150" y="505" width="200" height="12" rx="3" fill="#2d2d44"/>
+    <rect x="150" y="505" width="200" height="5" rx="1" fill="#3d3d5c"/>
+    <!-- Teclado -->
+    <rect x="155" y="500" width="190" height="8" rx="1" fill="#1a1a2e"/>
+    <!-- Teclas animadas RGB -->
+    <g fill="#2d2d44">
+      <rect x="160" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#00d4ff;#2d2d44" dur="0.2s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="168" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#ff00ff;#2d2d44" dur="0.25s" begin="0.05s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="176" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#00ff88;#2d2d44" dur="0.3s" begin="0.1s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="184" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#00d4ff;#2d2d44" dur="0.22s" begin="0.15s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="192" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#ff00ff;#2d2d44" dur="0.28s" begin="0.02s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="200" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#00ff88;#2d2d44" dur="0.2s" begin="0.08s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="208" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#00d4ff;#2d2d44" dur="0.26s" begin="0.12s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="216" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#ff00ff;#2d2d44" dur="0.24s" begin="0.18s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="224" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#00ff88;#2d2d44" dur="0.3s" begin="0.07s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="232" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#00d4ff;#2d2d44" dur="0.22s" begin="0.14s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="240" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#ff00ff;#2d2d44" dur="0.28s" begin="0.03s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="248" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#00ff88;#2d2d44" dur="0.2s" begin="0.11s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="256" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#00d4ff;#2d2d44" dur="0.25s" begin="0.16s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="264" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#ff00ff;#2d2d44" dur="0.3s" begin="0.09s" repeatCount="indefinite"/>
+      </rect>
+      <rect x="272" y="501" width="6" height="3" rx="0.5">
+        <animate attributeName="fill" values="#2d2d44;#00ff88;#2d2d44" dur="0.23s" begin="0.13s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+    <!-- Trackpad -->
+    <rect x="220" y="506" width="60" height="2" rx="1" fill="#2d2d44" opacity="0.5"/>
+    
+    <!-- Pantalla -->
+    <rect x="170" y="380" width="160" height="120" rx="4" fill="#1a1a2e"/>
+    <rect x="174" y="384" width="152" height="112" rx="2" fill="#0f0f1a"/>
+    <!-- Pantalla encendida -->
+    <rect x="176" y="386" width="148" height="108" fill="#0a1929" opacity="0.9">
+      <animate attributeName="opacity" values="0.9;0.7;0.9" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <!-- Código en pantalla con colores modernos -->
+    <rect x="180" y="390" width="40" height="2" rx="1" fill="#00d4ff" opacity="0.8"/>
+    <rect x="180" y="395" width="30" height="2" rx="1" fill="#ff00ff" opacity="0.7"/>
+    <rect x="180" y="400" width="50" height="2" rx="1" fill="#00ff88" opacity="0.8"/>
+    <rect x="180" y="405" width="25" height="2" rx="1" fill="#00d4ff" opacity="0.7"/>
+    <rect x="180" y="410" width="35" height="2" rx="1" fill="#ff00ff" opacity="0.8"/>
+    <rect x="230" y="390" width="20" height="2" rx="1" fill="#00ff88" opacity="0.6"/>
+    <rect x="230" y="395" width="35" height="2" rx="1" fill="#00d4ff" opacity="0.6"/>
+    <rect x="230" y="400" width="15" height="2" rx="1" fill="#ff00ff" opacity="0.6"/>
+    <!-- Logo moderno -->
+    <g transform="translate(250, 440)">
+      <circle cx="0" cy="0" r="12" fill="#00d4ff" opacity="0.1">
+        <animate attributeName="opacity" values="0.08;0.2;0.08" dur="3s" repeatCount="indefinite"/>
+      </circle>
+      <path d="M0 -6 C-2.5 -6, -4.5 -4, -4.5 -1.5 C-4.5 1.5, -2.5 3.5, 0 5.5 C2.5 3.5, 4.5 1.5, 4.5 -1.5 C4.5 -4, 2.5 -6, 0 -6 Z M0 -7 C0.5 -8.5, 1 -9, 1.5 -9 C1.5 -10, 0.5 -10, 0 -9.5 C-0.5 -10, -1.5 -10, -1.5 -9 C-1 -9, -0.5 -8.5, 0 -7 Z" fill="#00d4ff" opacity="0.8"/>
+    </g>
+  </g>
+
+  <!-- Monitor extra moderno -->
+  <g id="monitor" transform="translate(340, 360)">
+    <rect x="15" y="55" width="20" height="5" rx="1" fill="#2d2d44"/>
+    <rect x="20" y="40" width="10" height="15" fill="#1a1a2e"/>
+    <rect x="0" y="0" width="50" height="40" rx="3" fill="#1a1a2e"/>
+    <rect x="2" y="2" width="46" height="36" rx="2" fill="#0f0f1a"/>
+    <!-- RGB frame -->
+    <rect x="0" y="0" width="50" height="40" rx="3" fill="none" stroke="url(#rgbGrad)" stroke-width="1" opacity="0.6">
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="5" y="5" width="15" height="2" rx="1" fill="#00d4ff" opacity="0.8"/>
+    <rect x="5" y="9" width="10" height="2" rx="1" fill="#ff00ff" opacity="0.7"/>
+    <rect x="5" y="13" width="20" height="2" rx="1" fill="#00ff88" opacity="0.8"/>
+    <rect x="5" y="17" width="12" height="2" rx="1" fill="#00d4ff" opacity="0.7"/>
+    <rect x="5" y="21" width="18" height="2" rx="1" fill="#ff00ff" opacity="0.8"/>
+    <rect x="25" y="5" width="12" height="2" rx="1" fill="#00ff88" opacity="0.6"/>
+    <rect x="25" y="9" width="18" height="2" rx="1" fill="#00d4ff" opacity="0.6"/>
+    <rect x="25" y="13" width="8" height="2" rx="1" fill="#ff00ff" opacity="0.6"/>
+  </g>
+
+  <!-- Taza de café moderna -->
+  <g id="coffee" transform="translate(100, 500)">
+    <animateTransform attributeName="transform" type="translate" values="100 500; 100 498; 100 500" dur="4s" repeatCount="indefinite"/>
+    <rect x="0" y="0" width="18" height="20" rx="3" fill="#1a1a2e"/>
+    <ellipse cx="9" cy="0" rx="9" ry="3" fill="#0f0f1a"/>
+    <ellipse cx="9" cy="0" rx="7" ry="2" fill="#6b4423"/>
+    <path d="M18 5 Q24 5 24 10 Q24 15 18 15" stroke="#1a1a2e" stroke-width="2" fill="none"/>
+    <!-- LED en la taza -->
+    <rect x="2" y="8" width="14" height="2" rx="1" fill="#00d4ff" opacity="0.6">
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <!-- Vapor -->
+    <path d="M5 -5 Q8 -12 5 -18" stroke="#fff" stroke-width="1" fill="none" opacity="0">
+      <animate attributeName="opacity" values="0;0.3;0" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="d" values="M5 -5 Q8 -12 5 -18;M5 -8 Q2 -15 5 -22;M5 -5 Q8 -12 5 -18" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M12 -3 Q15 -10 12 -16" stroke="#fff" stroke-width="1" fill="none" opacity="0">
+      <animate attributeName="opacity" values="0;0.2;0" dur="2.5s" begin="0.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Libros tech -->
+  <g id="books" transform="translate(380, 505)">
+    <rect x="0" y="14" width="28" height="6" rx="1" fill="#0f0f1a"/>
+    <rect x="2" y="7" width="24" height="7" rx="1" fill="#1a1a2e"/>
+    <rect x="1" y="0" width="26" height="7" rx="1" fill="#2d2d44"/>
+    <line x1="4" y1="10" x2="22" y2="10" stroke="#00d4ff" stroke-width="0.5" opacity="0.6"/>
+    <line x1="4" y1="17" x2="22" y2="17" stroke="#ff00ff" stroke-width="0.5" opacity="0.6"/>
+  </g>
+
+  <!-- Planta moderna -->
+  <g id="plant" transform="translate(70, 475)">
+    <path d="M5 30 L10 50 L30 50 L35 30 Z" fill="#1a1a2e"/>
+    <ellipse cx="20" cy="30" rx="15" ry="4" fill="#0f0f1a"/>
+    <path d="M20 30 Q10 10 5 15 Q10 25 20 30" fill="#00ff88" opacity="0.8"/>
+    <path d="M20 30 Q20 5 20 8 Q22 20 20 30" fill="#00d4ff" opacity="0.7"/>
+    <path d="M20 30 Q30 10 35 15 Q30 25 20 30" fill="#00ff88" opacity="0.8"/>
+    <path d="M20 30 Q15 15 12 18 Q16 25 20 30" fill="#00d4ff" opacity="0.7"/>
+  </g>
+
+  <!-- Mouse gamer RGB -->
+  <g id="mouse" transform="translate(330, 510)">
+    <ellipse cx="0" cy="0" rx="10" ry="14" fill="#1a1a2e"/>
+    <ellipse cx="0" cy="-5" rx="6" ry="8" fill="#2d2d44"/>
+    <line x1="0" y1="-5" x2="0" y2="5" stroke="#0f0f1a" stroke-width="1"/>
+    <!-- RGB en mouse -->
+    <ellipse cx="0" cy="-5" rx="6" ry="8" fill="none" stroke="url(#rgbGrad)" stroke-width="1" opacity="0.7">
+      <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- Auriculares gamer RGB en el escritorio -->
+  <g id="headphones" transform="translate(120, 510)">
+    <path d="M0 0 Q0 -15 15 -15 Q30 -15 30 0" stroke="#1a1a2e" stroke-width="4" fill="none"/>
+    <rect x="-3" y="-2" width="8" height="12" rx="3" fill="#0f0f1a"/>
+    <rect x="25" y="-2" width="8" height="12" rx="3" fill="#0f0f1a"/>
+    <!-- RGB en auriculares -->
+    <rect x="-2" y="0" width="6" height="8" rx="2" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.7">
+      <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="26" y="0" width="6" height="8" rx="2" fill="none" stroke="#ff00ff" stroke-width="1" opacity="0.7">
+      <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2s" begin="1s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+</svg>

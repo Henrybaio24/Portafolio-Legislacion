@@ -1,9 +1,8 @@
 // lightbox.js - Visor de imágenes con zoom
+
 function initLightbox() {
 
-  // Función para crear el overlay del lightbox
   function abrirLightbox(src) {
-    // Cerrar lightbox existente si hay
     const existente = document.getElementById('lightbox-active');
     if (existente) existente.remove();
 
@@ -18,12 +17,10 @@ function initLightbox() {
     overlay.appendChild(img);
     document.body.appendChild(overlay);
 
-    // Cerrar al hacer clic
     overlay.addEventListener('click', function() {
       overlay.remove();
     });
 
-    // Cerrar con tecla ESC
     document.addEventListener('keydown', function cerrar(e) {
       if (e.key === 'Escape') {
         overlay.remove();
@@ -32,15 +29,14 @@ function initLightbox() {
     });
   }
 
-  // Función para agregar botón de zoom a una imagen
-  function agregarZoom(figure) {
+  function agregarZoom(container) {
     // Evitar duplicar botones
-    if (figure.querySelector('.lightbox-zoom-btn')) return;
+    if (container.querySelector('.lightbox-zoom-btn')) return;
 
-    const img = figure.querySelector('.magazine-img, .doc-img, img');
+    const img = container.querySelector('.magazine-img, .doc-img, img');
     if (!img) return;
 
-    figure.style.position = 'relative';
+    container.style.position = 'relative';
 
     const btn = document.createElement('button');
     btn.innerHTML = '🔍';
@@ -53,28 +49,25 @@ function initLightbox() {
       abrirLightbox(img.src);
     });
 
-    figure.appendChild(btn);
+    container.appendChild(btn);
   }
 
-  // Selector centralizado: agrega aquí cualquier nueva variante de clase
-  // que uses en tus plantillas para que el zoom funcione en todas las páginas.
-  const ZOOM_SELECTOR = '.magazine-figure, .magazine-figure-span, .doc-card-area';
+  // Selector actualizado: incluye .doc-card-area que es un div, no figure
+  const ZOOM_SELECTOR = '.magazine-figure, .magazine-figure-span, .doc-card-area, figure';
 
   // Agregar zoom a imágenes existentes
   document.querySelectorAll(ZOOM_SELECTOR).forEach(agregarZoom);
 
-  // Observar nuevas imágenes que se cargan dinámicamente
+  // Observar nuevas imágenes
   const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       mutation.addedNodes.forEach(function(node) {
-        if (node.nodeType === 1) { // Elemento HTML
-          // Si el nodo agregado ya ES una figura, agrégale el botón
+        if (node.nodeType === 1) {
           if (node.matches?.(ZOOM_SELECTOR)) {
             agregarZoom(node);
           }
-          // Buscar también figuras dentro del nodo agregado
-          const figures = node.querySelectorAll?.(ZOOM_SELECTOR);
-          figures?.forEach(agregarZoom);
+          const containers = node.querySelectorAll?.(ZOOM_SELECTOR);
+          containers?.forEach(agregarZoom);
         }
       });
     });

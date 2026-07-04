@@ -1,10 +1,58 @@
+/* ═══════════════════════════════════════════════════════════════
+   TOOLBAR CON UNIVERSIDAD Y FACULTAD
+   ═══════════════════════════════════════════════════════════════ */
+
 .toolbar {
   position: fixed;
   top: 1.4rem;
+  left: 1.4rem;
   right: 1.4rem;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 0.6rem;
   z-index: 50;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toolbar.toolbar-hidden {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+
+/* Marca universitaria izquierda */
+.toolbar-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.2;
+  padding: 0.3rem 0;
+}
+
+.toolbar-univ {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b8944c;
+}
+
+.toolbar-faculty {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(184, 148, 76, 0.55);
+}
+
+/* Botones derecha */
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .btn {
@@ -57,19 +105,73 @@
   }
 }
 
-.notebook-topbar-right {
-  display: flex;
+/* Responsive */
+@media (max-width: 768px) {
+  .toolbar {
+    top: 1rem;
+    left: 1rem;
+    right: 1rem;
+  }
+  
+  .toolbar-univ {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+  
+  .toolbar-faculty {
+    font-size: 0.5rem;
+    letter-spacing: 0.04em;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .toolbar-brand {
+    display: none;
+  }
+  
+  .toolbar {
+    justify-content: flex-end;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   BOTÓN "SUBIR ARRIBA"
+   ═══════════════════════════════════════════════════════════════ */
+
+.btn-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #b8944c;
+  color: #1c1018;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 999;
+  display: none;
   align-items: center;
-  flex-shrink: 0;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  transition: background .2s, transform .2s;
 }
 
-.toolbar {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+.btn-top:hover {
+  background: #cba85d;
+  transform: translateY(-2px);
 }
 
-.toolbar.toolbar-hidden {
-  opacity: 0;
-  transform: translateY(-12px);
-  pointer-events: none;
+.btn-top.visible {
+  display: flex;
 }
-

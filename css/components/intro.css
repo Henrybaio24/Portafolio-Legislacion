@@ -1,0 +1,462 @@
+/* Asegurar que html y body ocupen todo */
+html, body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* ═══════════════════════════════════════ */
+/* PANTALLA DE BIENVENIDA (INTRO)         */
+/* ═══════════════════════════════════════ */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: radial-gradient(ellipse at 50% 32%, #2a1a20 0%, #1c1018 68%);
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+  opacity: 1;
+  visibility: visible;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════ */
+/* CIERRE NORMAL (primera visita - clic)   */
+/* ═══════════════════════════════════════ */
+.intro-overlay.intro-closing {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.intro-overlay.intro-closing .intro-textbox {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* ═══════════════════════════════════════ */
+/* CIERRE PARA RETORNO (auto-transición)   */
+/* ═══════════════════════════════════════ */
+.intro-overlay.intro-closing-return {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.6s ease 0.8s, visibility 0.6s ease 0.8s;
+}
+
+.intro-overlay.intro-closing-return .intro-textbox {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease 0.5s, transform 0.4s ease 0.5s;
+}
+
+/* ═══════════════════════════════════════ */
+/* PATRÓN DE FONDO SUTIL                   */
+/* ═══════════════════════════════════════ */
+.intro-bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(201, 168, 106, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(201, 168, 106, 0.02) 0%, transparent 50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════ */
+/* ESQUINAS ORNAMENTALES                   */
+/* ═══════════════════════════════════════ */
+.intro-corner {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border-color: rgba(201, 168, 106, 0.2);
+  border-style: solid;
+  z-index: 1;
+}
+
+.intro-corner.top-left {
+  top: 30px;
+  left: 30px;
+  border-width: 1px 0 0 1px;
+}
+
+.intro-corner.top-right {
+  top: 30px;
+  right: 30px;
+  border-width: 1px 1px 0 0;
+}
+
+.intro-corner.bottom-left {
+  bottom: 30px;
+  left: 30px;
+  border-width: 0 0 1px 1px;
+}
+
+.intro-corner.bottom-right {
+  bottom: 30px;
+  right: 30px;
+  border-width: 0 1px 1px 0;
+}
+
+/* ═══════════════════════════════════════ */
+/* ORNAMENTO SUPERIOR: BALANZA             */
+/* ═══════════════════════════════════════ */
+.intro-ornament-top {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 1;
+}
+
+.ornament-line {
+  display: block;
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 106, 0.4), transparent);
+}
+
+.ornament-icon {
+  width: 24px;
+  height: 24px;
+  color: rgba(201, 168, 106, 0.6);
+}
+
+/* ═══════════════════════════════════════ */
+/* BALANZA ANIMADA                         */
+/* ═══════════════════════════════════════ */
+.scale-icon {
+  animation: scaleBalance 4s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+@keyframes scaleBalance {
+  0%, 100% { transform: rotate(-3deg); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(3deg); }
+  75% { transform: rotate(-2deg); }
+}
+
+/* ═══════════════════════════════════════ */
+/* ICONOS LATERALES CON ANIMACIÓN          */
+/* ═══════════════════════════════════════ */
+.intro-icon-sides {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  z-index: 1;
+}
+
+.intro-icon-sides.left {
+  left: 35px;
+  align-items: center;
+}
+
+.intro-icon-sides.right {
+  right: 35px;
+  align-items: center;
+}
+
+.side-icon-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: default;
+  transition: transform 0.3s ease;
+}
+
+.side-icon-wrap:hover {
+  transform: scale(1.1);
+}
+
+.side-icon {
+  width: 30px;
+  height: 30px;
+  color: rgba(201, 168, 106, 0.3);
+  transition: color 0.3s ease, stroke-width 0.3s ease;
+  animation: iconGlow 3s ease-in-out infinite;
+}
+
+.side-icon-wrap:nth-child(1) .side-icon { animation-delay: 0s; }
+.side-icon-wrap:nth-child(2) .side-icon { animation-delay: 1.5s; }
+
+.side-icon-wrap:hover .side-icon {
+  color: rgba(201, 168, 106, 0.8);
+  stroke-width: 1.6;
+}
+
+@keyframes iconGlow {
+  0%, 100% { opacity: 0.4; color: rgba(201, 168, 106, 0.3); }
+  50% { opacity: 0.9; color: rgba(201, 168, 106, 0.6); }
+}
+
+.side-icon-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  color: rgba(201, 168, 106, 0.35);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.side-icon-wrap:hover .side-icon-text {
+  color: rgba(201, 168, 106, 0.7);
+}
+
+/* ═══════════════════════════════════════ */
+/* LÍNEAS VERTICALES DECORATIVAS           */
+/* ═══════════════════════════════════════ */
+.intro-vertical-lines {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 0;
+}
+
+.intro-vertical-lines.left {
+  left: 20px;
+}
+
+.intro-vertical-lines.right {
+  right: 20px;
+  align-items: flex-end;
+}
+
+.intro-vertical-lines span {
+  display: block;
+  width: 1px;
+  height: 25px;
+  background: rgba(201, 168, 106, 0.06);
+}
+
+.intro-vertical-lines span:nth-child(1) { height: 35px; }
+.intro-vertical-lines span:nth-child(2) { height: 20px; }
+.intro-vertical-lines span:nth-child(3) { height: 45px; }
+.intro-vertical-lines span:nth-child(4) { height: 15px; }
+.intro-vertical-lines span:nth-child(5) { height: 30px; }
+
+/* ═══════════════════════════════════════ */
+/* ELEMENTOS PRINCIPALES                   */
+/* ═══════════════════════════════════════ */
+.intro-avatar-wrap {
+  width: 260px;
+  max-width: 46vw;
+  max-height: 44vh;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.9s cubic-bezier(0.65, -0.3, 0.3, 1.5), opacity 0.4s ease;
+}
+
+.intro-avatar-wrap svg {
+  width: 100%;
+  height: 100%;
+  max-height: 44vh;
+  object-fit: contain;
+  display: block;
+}
+
+.intro-avatar-wrap.flying {
+  position: fixed !important;
+  z-index: 10000 !important;
+  margin: 0 !important;
+  visibility: visible !important;
+}
+
+.intro-textbox {
+  text-align: center;
+  padding: 0 20px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.intro-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 28px;
+  color: #f5ede0;
+  margin: 0 0 8px;
+  letter-spacing: 0.01em;
+}
+
+.intro-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  color: #c9a86a;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 26px;
+}
+
+.intro-enter-btn {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 12.5px;
+  color: #1c1018;
+  background: linear-gradient(180deg, #e8c987, #c9a86a);
+  border: none;
+  padding: 13px 34px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(201, 168, 106, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.intro-enter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(201, 168, 106, 0.5);
+}
+
+.intro-enter-btn:active {
+  transform: translateY(0);
+}
+
+.avatar-fallback {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 48px;
+  color: #c9a86a;
+  background: rgba(201, 168, 106, 0.1);
+  border-radius: 50%;
+}
+
+/* ═══════════════════════════════════════ */
+/* ORNAMENTO INFERIOR: MARTILLO            */
+/* ═══════════════════════════════════════ */
+.intro-ornament-bottom {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+}
+
+.intro-ornament-bottom .ornament-line.short {
+  width: 30px;
+}
+
+.ornament-icon-bottom {
+  width: 22px;
+  height: 22px;
+  color: rgba(201, 168, 106, 0.4);
+}
+
+/* MARTILLO ANIMADO */
+.gavel-icon {
+  animation: gavelHit 2.5s ease-in-out infinite;
+  transform-origin: center top;
+}
+
+@keyframes gavelHit {
+  0%, 90%, 100% { transform: rotate(0deg); }
+  92% { transform: rotate(-15deg); }
+  94% { transform: rotate(5deg); }
+  96% { transform: rotate(-8deg); }
+  98% { transform: rotate(2deg); }
+}
+
+.ornament-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  color: rgba(201, 168, 106, 0.4);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.ornament-divider {
+  font-size: 10px;
+  color: rgba(201, 168, 106, 0.25);
+}
+
+/* ═══════════════════════════════════════ */
+/* ANIMACIÓN SUTIL PARA RETORNO            */
+/* ═══════════════════════════════════════ */
+.intro-overlay.auto-enter .intro-avatar-wrap {
+  animation: gentlePulse 2s ease-in-out;
+}
+
+@keyframes gentlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* ═══════════════════════════════════════ */
+/* RESPONSIVE                               */
+/* ═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  .intro-icon-sides {
+    display: none;
+  }
+  
+  .intro-vertical-lines {
+    display: none;
+  }
+  
+  .intro-corner {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .intro-ornament-top {
+    top: 25px;
+  }
+  
+  .ornament-line {
+    width: 30px;
+  }
+  
+  .intro-ornament-bottom {
+    bottom: 25px;
+  }
+}
+
+@media (max-width: 640px) {
+  .intro-avatar-wrap { width: 200px; }
+  .intro-title { font-size: 22px; }
+  .intro-subtitle { font-size: 11px; }
+  .ornament-text { font-size: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-overlay,
+  .intro-avatar-wrap,
+  .intro-textbox,
+  .scale-icon,
+  .gavel-icon,
+  .side-icon {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .intro-overlay.auto-enter .intro-avatar-wrap {
+    animation: none !important;
+  }
+}

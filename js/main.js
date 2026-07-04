@@ -2,6 +2,7 @@ import { loadPage } from './modules/page-loader.js';
 import { initLightbox } from './modules/lightbox.js';
 import { initNotebook } from './modules/notebook.js';
 import { initWelcomeAvatar } from './modules/welcome-avatar.js';
+import { initIntro } from './modules/intro.js';
 import { initScrollTop } from './modules/scroll-top.js';
 import { initIndexPage } from './modules/index-page.js';
 import { initSideToc } from './modules/toc.js';
@@ -14,6 +15,7 @@ import { renderPageSlots, generateTocEntries } from './utilities/page-numbering.
 // Inicialización inmediata
 initNotebook();
 initWelcomeAvatar();
+initIntro(); 
 initScrollTop();
 initToolbarAutoHide();
 renderPageSlots();

@@ -212,3 +212,59 @@
   font-weight: 700;
   color: #c9a84c;
 }
+
+
+/* ═══════════════════════════════════════════════════════ */
+/* REFERENCIAS APA 7 — ENLACES CLICKEABLES               */
+/* ═══════════════════════════════════════════════════════ */
+
+.apa-references {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0;
+}
+
+.apa-entry {
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: #1a1a1a;
+  margin: 0;
+  padding-left: 32px;
+  text-indent: -32px;
+  text-align: left;
+  font-weight: 400;
+}
+
+.apa-entry em {
+  font-style: italic;
+  color: #1a1a1a;
+}
+
+.apa-link {
+  color: #1565c0;
+  text-decoration: none;
+  word-break: break-all;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.apa-link:hover {
+  color: #0d47a1;
+  border-bottom-color: #0d47a1;
+}
+
+.apa-link:active {
+  color: #1565c0;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .apa-entry {
+    font-size: 11.5px;
+    line-height: 1.8;
+    padding-left: 24px;
+    text-indent: -24px;
+  }
+}
