@@ -11,6 +11,7 @@ import { initToolbarAutoHide } from './modules/toolbar-autohide.js';
 import { initScrollRestore } from './utilities/scroll-restore.js';
 import { pagesWithContainer } from './utilities/page-data.js';
 import { renderPageSlots, generateTocEntries } from './utilities/page-numbering.js';
+import { actualizarFecha } from './modules/date.js';
 
 // Inicialización inmediata
 initNotebook();
@@ -30,4 +31,5 @@ Promise.all(
   initLightbox();
   initCarousel();
   initScrollRestore();
+  actualizarFecha();
 });
