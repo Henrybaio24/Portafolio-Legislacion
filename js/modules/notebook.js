@@ -5,6 +5,11 @@ const NATURAL_H = 1122.5197;  // 297mm a 96dpi
 const RING_COUNT = 14;
 const HINT_DELAY = 3000;
 
+// Constantes de zoom
+const ZOOM_MIN = 0.5;
+const ZOOM_MAX = 4.5;
+const ZOOM_STEP = 0.2;
+
 class Notebook {
   constructor() {
     this.pages = [];
@@ -14,12 +19,17 @@ class Notebook {
     this.hintTimeout = null;
     this.touchStartX = null;
     this.initialized = false;
+    this.zoom = 1.0;
+
+    // Bind único para poder añadir/quitar el mismo listener de resize
+    this._onResize = () => this.showCurrent();
   }
 
   // ── Referencias al DOM ──
   cacheElements() {
     this.els = {
       overlay:  document.getElementById('notebookOverlay'),
+      stage:    document.querySelector('.notebook-stage'),
       bookWrap: document.getElementById('notebookBookWrap'),
       content:  document.getElementById('notebookPageContent'),
       flip:     document.getElementById('notebookPageFlip'),
@@ -30,6 +40,10 @@ class Notebook {
       next:     document.getElementById('notebookNext'),
       close:    document.getElementById('notebookClose'),
       openBtn:  document.getElementById('btnNotebook'),
+      zoomIn:     document.getElementById('notebookZoomIn'),
+      zoomOut:    document.getElementById('notebookZoomOut'),
+      zoomReset:  document.getElementById('notebookZoomReset'),
+      zoomLevel:  document.getElementById('notebookZoomLevel'),
     };
   }
 
@@ -62,12 +76,34 @@ class Notebook {
     }
   }
 
-  fitToStage() {
-    const availW = this.els.bookWrap.clientWidth;
-    const availH = this.els.bookWrap.clientHeight;
-    const scale = Math.min(availW / NATURAL_W, availH / NATURAL_H);
+  // NUEVO: mide el espacio disponible dentro del stage (descontando su padding),
+  // que es un tamaño estable independiente del zoom.
+  computeStageBox() {
+    const stage = this.els.stage;
+    const cs = getComputedStyle(stage);
+    const padX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+    const padY = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+    return {
+      w: stage.clientWidth - padX,
+      h: stage.clientHeight - padY
+    };
+  }
+
+  // NUEVO: escala "100%" = la que ajusta la hoja A4 completa al stage
+  getBaseScale() {
+    const { w: availW, h: availH } = this.computeStageBox();
+    return Math.min(availW / NATURAL_W, availH / NATURAL_H);
+  }
+
+  // NUEVO: aplica el tamaño real (base * zoom) al book-wrap y a los contenedores
+  // de página. Antes solo se escalaba el .a4 interno y el contenedor se quedaba
+  // fijo con overflow:hidden, por eso el zoom no se veía.
+  applySize(scale) {
     const w = NATURAL_W * scale;
     const h = NATURAL_H * scale;
+
+    this.els.bookWrap.style.width = `${w}px`;
+    this.els.bookWrap.style.height = `${h}px`;
 
     [this.els.content, this.els.flip].forEach(node => {
       node.style.width = `${w}px`;
@@ -96,10 +132,36 @@ class Notebook {
     this.els.next.disabled = this.current === this.pages.length - 1;
   }
 
+  // ── Zoom ──
+  applyZoom() {
+    this.els.zoomLevel.textContent = `${Math.round(this.zoom * 100)}%`;
+    this.els.zoomOut.disabled = this.zoom <= ZOOM_MIN;
+    this.els.zoomIn.disabled = this.zoom >= ZOOM_MAX;
+    this.showCurrent();
+  }
+
+  zoomIn() {
+    if (this.zoom >= ZOOM_MAX) return;
+    this.zoom = Math.min(ZOOM_MAX, parseFloat((this.zoom + ZOOM_STEP).toFixed(2)));
+    this.applyZoom();
+  }
+
+  zoomOut() {
+    if (this.zoom <= ZOOM_MIN) return;
+    this.zoom = Math.max(ZOOM_MIN, parseFloat((this.zoom - ZOOM_STEP).toFixed(2)));
+    this.applyZoom();
+  }
+
+  zoomReset() {
+    this.zoom = 1.0;
+    this.applyZoom();
+  }
+
   showCurrent() {
     if (!this.pages.length) return;
-    const scale = this.fitToStage();
-    this.renderInto(this.els.content, this.pages[this.current].html, scale);
+    const baseScale = this.getBaseScale();
+    const finalScale = this.applySize(baseScale * this.zoom);
+    this.renderInto(this.els.content, this.pages[this.current].html, finalScale);
     this.buildRings();
     this.updateChrome();
   }
@@ -111,7 +173,8 @@ class Notebook {
     if (targetIndex < 0 || targetIndex >= this.pages.length) return;
 
     this.animating = true;
-    const scale = this.fitToStage();
+    const baseScale = this.getBaseScale();
+    const finalScale = this.applySize(baseScale * this.zoom);
     const flipEl = this.els.flip;
 
     flipEl.innerHTML = '';
@@ -124,14 +187,14 @@ class Notebook {
     flipEl.append(front, back);
 
     if (direction > 0) {
-      this.renderInto(front, this.pages[this.current].html, scale);
-      this.renderInto(back, this.pages[targetIndex].html, scale);
+      this.renderInto(front, this.pages[this.current].html, finalScale);
+      this.renderInto(back, this.pages[targetIndex].html, finalScale);
     } else {
-      this.renderInto(back, this.pages[this.current].html, scale);
-      this.renderInto(front, this.pages[targetIndex].html, scale);
+      this.renderInto(back, this.pages[this.current].html, finalScale);
+      this.renderInto(front, this.pages[targetIndex].html, finalScale);
     }
 
-    this.renderInto(this.els.content, this.pages[targetIndex].html, scale);
+    this.renderInto(this.els.content, this.pages[targetIndex].html, finalScale);
 
     flipEl.style.display = 'block';
     void flipEl.offsetWidth;
@@ -166,12 +229,13 @@ class Notebook {
     if (!this.pages.length) return;
 
     this.current = 0;
+    this.zoom = 1.0;
     document.body.classList.add('notebook-mode');
     this.els.openBtn.classList.add('active');
     this.els.overlay.classList.add('active');
 
     this.showCurrent();
-    window.addEventListener('resize', this.showCurrent);
+    window.addEventListener('resize', this._onResize);
 
     this.hideHint();
     clearTimeout(this.hintTimeout);
@@ -185,7 +249,10 @@ class Notebook {
     this.els.content.innerHTML = '';
     this.els.flip.innerHTML = '';
     this.els.flip.style.display = 'none';
-    window.removeEventListener('resize', this.showCurrent);
+    // Restaura el tamaño por defecto del CSS al cerrar
+    this.els.bookWrap.style.width = '';
+    this.els.bookWrap.style.height = '';
+    window.removeEventListener('resize', this._onResize);
 
     clearTimeout(this.hintTimeout);
     this.hideHint();
@@ -201,6 +268,9 @@ class Notebook {
     if (e.key === 'ArrowRight') this.next();
     else if (e.key === 'ArrowLeft') this.prev();
     else if (e.key === 'Escape') this.close();
+    else if (e.key === '+' || e.key === '=') { e.preventDefault(); this.zoomIn(); }
+    else if (e.key === '-') { e.preventDefault(); this.zoomOut(); }
+    else if (e.key === '0') { e.preventDefault(); this.zoomReset(); }
   }
 
   handleTouchStart(e) {
@@ -214,6 +284,14 @@ class Notebook {
       dx < 0 ? this.next() : this.prev();
     }
     this.touchStartX = null;
+  }
+
+  handleWheel(e) {
+    if (!document.body.classList.contains('notebook-mode')) return;
+    if (!e.ctrlKey) return;
+    e.preventDefault();
+    if (e.deltaY < 0) this.zoomIn();
+    else this.zoomOut();
   }
 
   // ── Construcción del hint ──
@@ -249,12 +327,18 @@ class Notebook {
 
     this.buildHint();
 
-    // Bind eventos
     this.els.openBtn.addEventListener('click', () => this.toggle());
     this.els.close.addEventListener('click', () => this.close());
     this.els.prev.addEventListener('click', () => this.prev());
     this.els.next.addEventListener('click', () => this.next());
+
+    this.els.zoomIn.addEventListener('click', () => this.zoomIn());
+    this.els.zoomOut.addEventListener('click', () => this.zoomOut());
+    this.els.zoomReset.addEventListener('click', () => this.zoomReset());
+
     document.addEventListener('keydown', (e) => this.handleKey(e));
+    document.addEventListener('wheel', (e) => this.handleWheel(e), { passive: false });
+
     this.els.bookWrap.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
     this.els.bookWrap.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: true });
   }

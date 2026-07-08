@@ -47,6 +47,8 @@ body.notebook-mode {
   background: rgba(0,0,0,0.35);
   border-bottom: 1px solid rgba(184,148,76,0.15);
   backdrop-filter: blur(4px);
+  position: relative;
+  z-index: 5;
 }
 
 .notebook-topbar-left {
@@ -140,11 +142,16 @@ body.notebook-mode {
   flex: 1;
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 1.8rem 5rem 2rem;
   box-sizing: border-box;
   min-height: 0;
+  overflow: auto;
+}
+
+.notebook-stage::before,
+.notebook-stage::after {
+  content: '';
+  margin: auto;
 }
 
 /* ── Book wrap ───────────────────────────────────────────── */
@@ -152,8 +159,7 @@ body.notebook-mode {
   position: relative;
   perspective: 2800px;
   flex-shrink: 0;
-  width: min(100%, calc((100vh - 6rem) * (210 / 297)));
-  height: min(calc(100vh - 6rem), calc(100% * (297 / 210)));
+  margin: auto;
   filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8)) drop-shadow(0 8px 20px rgba(0,0,0,0.6));
 }
 
@@ -185,8 +191,9 @@ body.notebook-mode {
   position: absolute;
   left: -5px;
   top: 0;
-  bottom: 0;
   width: 8px;
+  height: 100%;
+  max-height: 100%;
   z-index: 30;
   pointer-events: none;
   display: flex;
@@ -195,6 +202,8 @@ body.notebook-mode {
   justify-content: flex-start;
   padding: 45px 0;
   gap: 0;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .notebook-spine::before {
@@ -315,10 +324,6 @@ body.notebook-mode {
     width: 1.9rem;
     height: 1.9rem;
     font-size: 1.1rem;
-  }
-  .notebook-book-wrap {
-    width: min(100%, calc((100vh - 4.5rem) * (210 / 297)));
-    height: min(calc(100vh - 4.5rem), calc(100% * (297 / 210)));
   }
   .notebook-spine {
     left: -4px;
@@ -529,4 +534,71 @@ body.notebook-mode {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   ZOOM — solo controles visuales, NO toca layout de la revista
+   ═══════════════════════════════════════════════════════════════ */
+
+.notebook-zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  margin: 0 0.3rem;
+}
+
+.notebook-zoom-btn {
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  border: 1px solid rgba(184,148,76,0.4);
+  background: rgba(10,6,2,0.55);
+  color: #d4a84b;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  user-select: none;
+  padding: 0;
+}
+
+.notebook-zoom-btn:hover:not(:disabled) {
+  background: rgba(184,148,76,0.18);
+  border-color: #d4a84b;
+  transform: scale(1.1);
+}
+
+.notebook-zoom-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.notebook-zoom-level {
+  color: rgba(212,168,75,0.9);
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  min-width: 2.8rem;
+  text-align: center;
+  user-select: none;
+}
+
+@media (max-width: 720px) {
+  .notebook-zoom-btn {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.1rem;
+  }
+  .notebook-zoom-level {
+    font-size: 0.8rem;
+    min-width: 3rem;
+  }
+  .notebook-zoom-controls {
+    gap: 0.15rem;
+    margin: 0 0.2rem;
+  }
+}
 
