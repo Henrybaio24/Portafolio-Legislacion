@@ -1,6 +1,3 @@
-/**
- * Inicializa el botón "Ir al inicio" con lógica de visibilidad
- */
 export function initScrollTop() {
   const btnTop = document.getElementById('btnTop');
   const carouselOverlayEl = document.getElementById('carouselOverlay');
@@ -14,10 +11,8 @@ export function initScrollTop() {
     btnTop.classList.toggle('visible', !overlayActive && window.scrollY > 400);
   }
 
-  // Eventos de scroll
   window.addEventListener('scroll', updateVisibility);
-
-  // Observar cambios de clase en body y carousel
+  
   new MutationObserver(updateVisibility).observe(document.body, {
     attributes: true,
     attributeFilter: ['class'],
@@ -29,23 +24,17 @@ export function initScrollTop() {
       attributeFilter: ['class'],
     });
   }
-
-  // Click para ir arriba
   btnTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
 
-/**
- * Oculta el toolbar mientras se hace scroll,
- * y lo muestra de nuevo cuando el scroll se detiene.
- */
 export function initToolbarAutoHide() {
   const toolbar = document.getElementById('toolbar');
   if (!toolbar) return;
 
   let scrollTimeout = null;
-  const HIDE_DELAY_AFTER_STOP = 400; // ms sin scroll para volver a mostrarlo
+  const HIDE_DELAY_AFTER_STOP = 400; 
 
   window.addEventListener('scroll', () => {
     toolbar.classList.add('toolbar-hidden');
