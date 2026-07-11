@@ -25,16 +25,8 @@ export function initIntro() {
     });
 
   if (hasVisited) {
-    // ═══════════════════════════════════════
-    // VISITA DE RETORNO: Auto-transición
-    // ═══════════════════════════════════════
-    
-    // Ocultar SOLO el botón, el texto se queda visible
     if (enterBtn) enterBtn.style.display = 'none';
-
-    // Esperar 2 segundos mostrando avatar + texto, luego entrar
     setTimeout(() => {
-      // Usar clase diferente para retorno que NO oculta el texto inmediatamente
       overlay.classList.add('intro-closing-return');
       
       try {
@@ -44,11 +36,7 @@ export function initIntro() {
       }
     }, 2000);
 
-  } else {
-    // ═══════════════════════════════════════
-    // PRIMERA VISITA: Requiere clic en botón
-    // ═══════════════════════════════════════
-    
+  } else {    
     enterBtn?.addEventListener('click', () => {
       localStorage.setItem('hasVisited', 'true');
       
@@ -82,8 +70,6 @@ function playTransition(overlay, avatarWrap, avatarContainer, isReturnVisit) {
   const deltaX = endCenterX - startCenterX;
   const deltaY = endCenterY - startCenterY;
 
-  // Para primera visita: ocultar todo inmediatamente (comportamiento original)
-  // Para retorno: el texto se queda visible durante la animación
   if (!isReturnVisit) {
     overlay.classList.add('intro-closing');
   }
@@ -95,7 +81,7 @@ function playTransition(overlay, avatarWrap, avatarContainer, isReturnVisit) {
   avatarWrap.style.width = startRect.width + 'px';
   avatarWrap.style.height = startRect.height + 'px';
 
-  avatarWrap.offsetHeight; // forzar reflow
+  avatarWrap.offsetHeight; 
 
   requestAnimationFrame(() => {
     avatarWrap.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scale})`;
