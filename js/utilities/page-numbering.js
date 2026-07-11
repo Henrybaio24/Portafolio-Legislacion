@@ -1,8 +1,5 @@
 import { pagesWithContainer } from './page-data.js';
 
-/**
- * Renderiza los slots de página en el wrapper
- */
 export function renderPageSlots() {
   const wrapper = document.getElementById('pageWrapper');
   if (!wrapper) return;
@@ -15,10 +12,6 @@ export function renderPageSlots() {
     .join('');
 }
 
-/**
- * Genera las entradas del índice/TOC con numeración automática
- * @returns {Array} Array de objetos con num, topic, page, targetId
- */
 export function generateTocEntries() {
   let pageCounter = 0;
   let sectionCounter = 0;
@@ -30,12 +23,9 @@ export function generateTocEntries() {
 
     pageCounter++;
     const formattedPage = String(pageCounter).padStart(2, '0');
-
-    // Número de página en el footer
     const footerPage = container.querySelector('.footer-page');
     if (footerPage) footerPage.textContent = formattedPage;
 
-    // Numeración de secciones (solo en páginas que tienen section-num-bg)
     const sectionNumBg = container.querySelector('.section-num-bg');
     const sectionFooterNum = container.querySelector('.section-footer-num');
 
@@ -46,7 +36,6 @@ export function generateTocEntries() {
       if (sectionNumBg) sectionNumBg.textContent = formattedSection;
       if (sectionFooterNum) sectionFooterNum.textContent = formattedPage;
 
-      // Extrae el título de la sección
       const titleEl = container.querySelector('.section-title-main');
       const topic = titleEl
         ? titleEl.textContent.replace(/\s+/g, ' ').trim()
