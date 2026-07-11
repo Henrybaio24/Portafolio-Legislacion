@@ -30,7 +30,6 @@ function initLightbox() {
   }
 
   function agregarZoom(container) {
-    // Evitar duplicar botones
     if (container.querySelector('.lightbox-zoom-btn')) return;
 
     const img = container.querySelector('.magazine-img, .doc-img, img');
@@ -52,13 +51,10 @@ function initLightbox() {
     container.appendChild(btn);
   }
 
-  // Selector actualizado: incluye .doc-card-area que es un div, no figure
   const ZOOM_SELECTOR = '.magazine-figure, .magazine-figure-span, .doc-card-area, figure';
 
-  // Agregar zoom a imágenes existentes
   document.querySelectorAll(ZOOM_SELECTOR).forEach(agregarZoom);
 
-  // Observar nuevas imágenes
   const observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
       mutation.addedNodes.forEach(function(node) {
