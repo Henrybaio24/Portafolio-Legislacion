@@ -1,12 +1,7 @@
-/* ═══════════════════════════════════════ */
-/* AVATAR CON BURBUJA TIPO TERMINAL/CHAT   */
-/* ═══════════════════════════════════════ */
-
-/* Avatar al inicio de la página */
 .welcome-avatar {
   position: fixed;
   left: 24px;
-  top: 120px;           /* Justo debajo del toolbar */
+  top: 120px;          
   bottom: auto;
   z-index: 500;
   display: flex;
@@ -16,14 +11,12 @@
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* Cuando se esconde al hacer scroll, se va hacia arriba */
 .welcome-avatar.hidden-scroll {
   opacity: 0;
   transform: translateY(-20px);
   pointer-events: none;
 }
 
-/* ── Retrato ── */
 .welcome-avatar-portrait {
   width: 160px;
   height: 170px;
@@ -37,7 +30,6 @@
   display: block;
 }
 
-/* ── Burbuja tipo terminal/chat ── */
 .welcome-avatar-bubble {
   position: relative;
   background: linear-gradient(180deg, #1e2532 0%, #161b26 100%);
@@ -56,13 +48,11 @@
   animation: bubbleFloat 3.5s ease-in-out infinite;
 }
 
-/* Leve flotación para que se sienta "viva" */
 @keyframes bubbleFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
 }
 
-/* Barra superior tipo terminal */
 .bubble-header {
   display: flex;
   align-items: center;
@@ -83,7 +73,6 @@
 .bubble-dot:nth-child(2) { background: #ffbd2e; color: #ffbd2e; }
 .bubble-dot:nth-child(3) { background: #27c93f; color: #27c93f; }
 
-/* Cuerpo del mensaje */
 .bubble-body {
   padding: 14px 16px;
   position: relative;
@@ -112,7 +101,6 @@
   text-shadow: 0 0 12px rgba(126, 196, 245, 0.5);
 }
 
-/* Cursor parpadeante tipo terminal */
 .bubble-cursor {
   display: inline-block;
   color: #7ec4f5;
@@ -131,7 +119,6 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Pin conectando al avatar */
 .welcome-avatar-bubble::after {
   content: '';
   position: absolute;
@@ -190,7 +177,6 @@
   }
 }
 
-/* ── Botón cerrar ── */
 .welcome-avatar-close {
   position: absolute;
   top: -8px;
@@ -215,10 +201,6 @@
   background: #c9a86a;
   color: #1a202c;
 }
-
-/* ═══════════════════════════════════════ */
-/* RESPONSIVE                              */
-/* ═══════════════════════════════════════ */
 
 @media (max-width: 640px) {
   .welcome-avatar {
@@ -302,7 +284,6 @@
   font-style: italic;
 }
 
-/* ── Ícono de GitHub: siempre debe notarse ── */
 .author-github {
   position: relative;
   display: flex;
@@ -318,7 +299,6 @@
   animation: githubPulse 1.8s ease-in-out infinite;
 }
 
-/* Anillo expansivo tipo "notificación" alrededor del ícono */
 .author-github::before {
   content: '';
   position: absolute;
@@ -392,7 +372,6 @@
   }
 }
 
-/* Respeta accesibilidad: si el usuario prefiere menos movimiento */
 @media (prefers-reduced-motion: reduce) {
   .author-github,
   .author-github::before {
