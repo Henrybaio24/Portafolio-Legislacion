@@ -9,7 +9,6 @@ export function initScrollRestore() {
       window.scrollTo(0, parseInt(savedScroll, 10));
     }
   } else {
-    // Recarga (F5, forzada) o entrada nueva: siempre al inicio
     window.scrollTo(0, 0);
     localStorage.removeItem('scrollPos');
   }
