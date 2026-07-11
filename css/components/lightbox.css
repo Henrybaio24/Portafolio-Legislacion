@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   CARRUSEL
-   ═══════════════════════════════════════════════════════════════ */
-
 .carousel-overlay {
   display: none;
   position: fixed;
@@ -115,14 +111,6 @@
   max-width: 600px;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   LIGHTBOX / ZOOM
-   ═══════════════════════════════════════════════════════════════ */
-
-/* ═══════════════════════════════════════════════════════════════
-   LIGHTBOX / ZOOM
-   ═══════════════════════════════════════════════════════════════ */
-
 .lightbox-overlay {
   position: fixed;
   inset: 0;
@@ -154,7 +142,6 @@
   to { transform: scale(1); opacity: 1; }
 }
 
-/* Botón de zoom — SIEMPRE VISIBLE */
 .lightbox-zoom-btn {
   position: absolute;
   top: 8px;
@@ -170,7 +157,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 1;                    /* ← SIEMPRE VISIBLE */
+  opacity: 1;                   
   transition: background 0.2s ease, transform 0.2s ease;
   z-index: 10;
 }
