@@ -21,7 +21,6 @@ initScrollTop();
 initToolbarAutoHide();
 renderPageSlots();
 
-// Carga de páginas + post-procesamiento
 Promise.all(
   pagesWithContainer.map(p => loadPage(p.url, p.container))
 ).then(() => {
