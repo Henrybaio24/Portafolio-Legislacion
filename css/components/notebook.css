@@ -305,11 +305,11 @@ body.notebook-mode {
 }
 
 @keyframes notebookFlipPrev {
-  0%   { transform: rotateY(0deg); box-shadow: 0 0 0 rgba(0,0,0,0); }
-  30%  { box-shadow: 18px 0 45px rgba(0,0,0,0.4), 4px 0 10px rgba(0,0,0,0.28); }
-  50%  { box-shadow: 26px 0 55px rgba(0,0,0,0.45), 6px 0 14px rgba(0,0,0,0.32); }
-  70%  { box-shadow: 13px 0 35px rgba(0,0,0,0.3); }
-  100% { transform: rotateY(180deg); box-shadow: 0 0 0 rgba(0,0,0,0); }
+  0%   { transform: rotateY(-180deg); box-shadow: 0 0 0 rgba(0,0,0,0); }
+  30%  { box-shadow: -13px 0 35px rgba(0,0,0,0.3); }
+  50%  { box-shadow: -26px 0 55px rgba(0,0,0,0.45), -6px 0 14px rgba(0,0,0,0.32); }
+  70%  { box-shadow: -18px 0 45px rgba(0,0,0,0.4), -4px 0 10px rgba(0,0,0,0.28); }
+  100% { transform: rotateY(0deg); box-shadow: 0 0 0 rgba(0,0,0,0); }
 }
 
 /* ── Mobile ───────────────────────────────────────────────── */

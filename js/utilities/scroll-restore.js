@@ -1,11 +1,7 @@
-/**
- * Guarda y restaura la posición de scroll.
- * - Al recargar la página (F5 o recarga forzada): siempre va al inicio.
- * - Al navegar con los botones atrás/adelante del navegador: restaura el scroll.
- */
+
 export function initScrollRestore() {
   const navEntry = performance.getEntriesByType('navigation')[0];
-  const navType = navEntry?.type; // 'navigate' | 'reload' | 'back_forward' | 'prerender'
+  const navType = navEntry?.type; 
 
   if (navType === 'back_forward') {
     const savedScroll = localStorage.getItem('scrollPos');

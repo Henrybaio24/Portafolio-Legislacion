@@ -76,8 +76,6 @@ class Notebook {
     }
   }
 
-  // NUEVO: mide el espacio disponible dentro del stage (descontando su padding),
-  // que es un tamaño estable independiente del zoom.
   computeStageBox() {
     const stage = this.els.stage;
     const cs = getComputedStyle(stage);
@@ -89,15 +87,11 @@ class Notebook {
     };
   }
 
-  // NUEVO: escala "100%" = la que ajusta la hoja A4 completa al stage
   getBaseScale() {
     const { w: availW, h: availH } = this.computeStageBox();
     return Math.min(availW / NATURAL_W, availH / NATURAL_H);
   }
 
-  // NUEVO: aplica el tamaño real (base * zoom) al book-wrap y a los contenedores
-  // de página. Antes solo se escalaba el .a4 interno y el contenedor se quedaba
-  // fijo con overflow:hidden, por eso el zoom no se veía.
   applySize(scale) {
     const w = NATURAL_W * scale;
     const h = NATURAL_H * scale;
@@ -167,6 +161,8 @@ class Notebook {
   }
 
   // ── Animación de giro de página ──
+  
+
   flip(direction) {
     if (this.animating) return;
     const targetIndex = this.current + direction;
@@ -194,16 +190,30 @@ class Notebook {
       this.renderInto(front, this.pages[targetIndex].html, finalScale);
     }
 
-    this.renderInto(this.els.content, this.pages[targetIndex].html, finalScale);
+    if (direction > 0) {
+      this.renderInto(this.els.content, this.pages[targetIndex].html, finalScale);
+    }
 
+    flipEl.style.transform = direction > 0 ? 'rotateY(0deg)' : 'rotateY(-180deg)';
     flipEl.style.display = 'block';
-    void flipEl.offsetWidth;
-    flipEl.classList.add(direction > 0 ? 'flip-next' : 'flip-prev');
+    flipEl.getBoundingClientRect();
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        flipEl.classList.add(direction > 0 ? 'flip-next' : 'flip-prev');
+      });
+    });
 
     const onEnd = () => {
       flipEl.removeEventListener('animationend', onEnd);
       flipEl.style.display = 'none';
       flipEl.classList.remove('flip-next', 'flip-prev');
+      
+      // ── SOLO PARA REGRESAR: actualizar content al terminar ──
+      if (direction < 0) {
+        this.renderInto(this.els.content, this.pages[targetIndex].html, finalScale);
+      }
+      
       this.current = targetIndex;
       this.updateChrome();
       this.animating = false;
@@ -301,7 +311,7 @@ class Notebook {
     hint.innerHTML = `
       <div class="notebook-hint-icon">i</div>
       <div class="notebook-hint-text">
-        <p>Si no visualizas bien el contenido en esta vista, vuelve a la vista general.</p>
+        <p>Si no visualizas bien el contenido en esta vista, vuelve a la vista general. (Espera hasta que se carguen los PDF)</p>
       </div>
       <div class="notebook-hint-actions">
         <button class="notebook-hint-btn" id="notebookHintBack">Vista general</button>
