@@ -1,7 +1,7 @@
-// notebook.js - Modo Cuaderno (rediseño realista)
+// notebook.js - Modo Cuaderno 
 
-const NATURAL_W = 793.7008;   // 210mm a 96dpi
-const NATURAL_H = 1122.5197;  // 297mm a 96dpi
+const NATURAL_W = 793.7008;   
+const NATURAL_H = 1122.5197;  
 const RING_COUNT = 14;
 const HINT_DELAY = 3000;
 
@@ -21,11 +21,9 @@ class Notebook {
     this.initialized = false;
     this.zoom = 1.0;
 
-    // Bind único para poder añadir/quitar el mismo listener de resize
     this._onResize = () => this.showCurrent();
   }
 
-  // ── Referencias al DOM ──
   cacheElements() {
     this.els = {
       overlay:  document.getElementById('notebookOverlay'),
@@ -47,7 +45,6 @@ class Notebook {
     };
   }
 
-  // ── Captura de páginas ──
   capturePages() {
     const wrapper = document.querySelector('.page-wrapper');
     const labels = Array.from(wrapper.querySelectorAll('.page-label'));
@@ -63,7 +60,6 @@ class Notebook {
     });
   }
 
-  // ── Renderizado ──
   buildRings() {
     this.els.spine.innerHTML = '';
     const h = this.els.bookWrap.clientHeight;
@@ -160,9 +156,6 @@ class Notebook {
     this.updateChrome();
   }
 
-  // ── Animación de giro de página ──
-  
-
   flip(direction) {
     if (this.animating) return;
     const targetIndex = this.current + direction;
@@ -209,7 +202,6 @@ class Notebook {
       flipEl.style.display = 'none';
       flipEl.classList.remove('flip-next', 'flip-prev');
       
-      // ── SOLO PARA REGRESAR: actualizar content al terminar ──
       if (direction < 0) {
         this.renderInto(this.els.content, this.pages[targetIndex].html, finalScale);
       }
@@ -224,7 +216,6 @@ class Notebook {
   next() { this.flip(1); }
   prev() { this.flip(-1); }
 
-  // ── Aviso/Hint ──
   showHint() {
     this.els.hint?.classList.add('visible');
   }
@@ -233,7 +224,6 @@ class Notebook {
     this.els.hint?.classList.remove('visible');
   }
 
-  // ── Apertura/Cierre ──
   open() {
     this.capturePages();
     if (!this.pages.length) return;
@@ -259,7 +249,6 @@ class Notebook {
     this.els.content.innerHTML = '';
     this.els.flip.innerHTML = '';
     this.els.flip.style.display = 'none';
-    // Restaura el tamaño por defecto del CSS al cerrar
     this.els.bookWrap.style.width = '';
     this.els.bookWrap.style.height = '';
     window.removeEventListener('resize', this._onResize);
@@ -272,7 +261,6 @@ class Notebook {
     document.body.classList.contains('notebook-mode') ? this.close() : this.open();
   }
 
-  // ── Event Handlers ──
   handleKey(e) {
     if (!document.body.classList.contains('notebook-mode')) return;
     if (e.key === 'ArrowRight') this.next();
@@ -304,7 +292,6 @@ class Notebook {
     else this.zoomOut();
   }
 
-  // ── Construcción del hint ──
   buildHint() {
     const hint = document.createElement('div');
     hint.className = 'notebook-hint';
@@ -326,7 +313,6 @@ class Notebook {
     hint.querySelector('#notebookHintClose').addEventListener('click', () => this.hideHint());
   }
 
-  // ── Inicialización ──
   init() {
     if (this.initialized) return;
     this.initialized = true;
@@ -354,7 +340,6 @@ class Notebook {
   }
 }
 
-// Singleton
 let notebookInstance = null;
 
 export function initNotebook() {
