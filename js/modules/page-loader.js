@@ -6,14 +6,10 @@ async function loadPage(url, containerId) {
     const html = await response.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
-
-    // Inyectar los <link> de CSS de esta página al head del index
     const pageLinks = doc.querySelectorAll('link[rel="stylesheet"]');
     pageLinks.forEach(link => {
       let href = link.getAttribute('href');
-      // Convertir ../css/ → css/
       href = href.replace(/^(\.\.\/)+/, '');
-      // Solo agregar si no existe ya
       if (!document.querySelector(`link[href="${href}"]`)) {
         const newLink = document.createElement('link');
         newLink.rel = 'stylesheet';
