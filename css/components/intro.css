@@ -1,13 +1,9 @@
-/* Asegurar que html y body ocupen todo */
 html, body {
   min-height: 100vh;
   margin: 0;
   padding: 0;
 }
 
-/* ═══════════════════════════════════════ */
-/* PANTALLA DE BIENVENIDA (INTRO)         */
-/* ═══════════════════════════════════════ */
 .intro-overlay {
   position: fixed;
   inset: 0;
@@ -26,9 +22,6 @@ html, body {
   overflow: hidden;
 }
 
-/* ═══════════════════════════════════════ */
-/* CIERRE NORMAL (primera visita - clic)   */
-/* ═══════════════════════════════════════ */
 .intro-overlay.intro-closing {
   opacity: 0;
   visibility: hidden;
@@ -40,9 +33,6 @@ html, body {
   transform: translateY(10px);
 }
 
-/* ═══════════════════════════════════════ */
-/* CIERRE PARA RETORNO (auto-transición)   */
-/* ═══════════════════════════════════════ */
 .intro-overlay.intro-closing-return {
   opacity: 0;
   visibility: hidden;
@@ -56,9 +46,6 @@ html, body {
   transition: opacity 0.4s ease 0.5s, transform 0.4s ease 0.5s;
 }
 
-/* ═══════════════════════════════════════ */
-/* PATRÓN DE FONDO SUTIL                   */
-/* ═══════════════════════════════════════ */
 .intro-bg-pattern {
   position: absolute;
   inset: 0;
@@ -69,9 +56,6 @@ html, body {
   pointer-events: none;
 }
 
-/* ═══════════════════════════════════════ */
-/* ESQUINAS ORNAMENTALES                   */
-/* ═══════════════════════════════════════ */
 .intro-corner {
   position: absolute;
   width: 35px;
@@ -105,9 +89,6 @@ html, body {
   border-width: 0 1px 1px 0;
 }
 
-/* ═══════════════════════════════════════ */
-/* ORNAMENTO SUPERIOR: BALANZA             */
-/* ═══════════════════════════════════════ */
 .intro-ornament-top {
   position: absolute;
   top: 40px;
@@ -132,9 +113,6 @@ html, body {
   color: rgba(201, 168, 106, 0.6);
 }
 
-/* ═══════════════════════════════════════ */
-/* BALANZA ANIMADA                         */
-/* ═══════════════════════════════════════ */
 .scale-icon {
   animation: scaleBalance 4s ease-in-out infinite;
   transform-origin: center bottom;
@@ -147,9 +125,6 @@ html, body {
   75% { transform: rotate(-2deg); }
 }
 
-/* ═══════════════════════════════════════ */
-/* ICONOS LATERALES CON ANIMACIÓN          */
-/* ═══════════════════════════════════════ */
 .intro-icon-sides {
   position: absolute;
   top: 50%;
@@ -217,9 +192,6 @@ html, body {
   color: rgba(201, 168, 106, 0.7);
 }
 
-/* ═══════════════════════════════════════ */
-/* LÍNEAS VERTICALES DECORATIVAS           */
-/* ═══════════════════════════════════════ */
 .intro-vertical-lines {
   position: absolute;
   top: 50%;
@@ -252,9 +224,6 @@ html, body {
 .intro-vertical-lines span:nth-child(4) { height: 15px; }
 .intro-vertical-lines span:nth-child(5) { height: 30px; }
 
-/* ═══════════════════════════════════════ */
-/* ELEMENTOS PRINCIPALES                   */
-/* ═══════════════════════════════════════ */
 .intro-avatar-wrap {
   width: 260px;
   max-width: 46vw;
@@ -344,9 +313,6 @@ html, body {
   border-radius: 50%;
 }
 
-/* ═══════════════════════════════════════ */
-/* ORNAMENTO INFERIOR: MARTILLO            */
-/* ═══════════════════════════════════════ */
 .intro-ornament-bottom {
   position: absolute;
   bottom: 40px;
@@ -369,7 +335,6 @@ html, body {
   color: rgba(201, 168, 106, 0.4);
 }
 
-/* MARTILLO ANIMADO */
 .gavel-icon {
   animation: gavelHit 2.5s ease-in-out infinite;
   transform-origin: center top;
@@ -396,9 +361,6 @@ html, body {
   color: rgba(201, 168, 106, 0.25);
 }
 
-/* ═══════════════════════════════════════ */
-/* ANIMACIÓN SUTIL PARA RETORNO            */
-/* ═══════════════════════════════════════ */
 .intro-overlay.auto-enter .intro-avatar-wrap {
   animation: gentlePulse 2s ease-in-out;
 }
@@ -408,9 +370,6 @@ html, body {
   50% { transform: scale(1.02); }
 }
 
-/* ═══════════════════════════════════════ */
-/* RESPONSIVE                               */
-/* ═══════════════════════════════════════ */
 @media (max-width: 768px) {
   .intro-icon-sides {
     display: none;
