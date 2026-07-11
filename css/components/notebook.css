@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   COMPONENTE: MODO CUADERNO → Formato revista (colores originales)
-   ═══════════════════════════════════════════════════════════════ */
-
 body.notebook-mode {
   overflow: hidden;
 }
@@ -34,7 +30,6 @@ body.notebook-mode {
   display: flex;
 }
 
-/* ── Barra superior ──────────────────────────────────────── */
 .notebook-topbar {
   width: 100%;
   display: flex;
@@ -136,7 +131,6 @@ body.notebook-mode {
   white-space: nowrap;
 }
 
-/* ── Stage ───────────────────────────────────────────────── */
 .notebook-stage {
   position: relative;
   flex: 1;
@@ -154,7 +148,6 @@ body.notebook-mode {
   margin: auto;
 }
 
-/* ── Book wrap ───────────────────────────────────────────── */
 .notebook-book-wrap {
   position: relative;
   perspective: 2800px;
@@ -163,7 +156,6 @@ body.notebook-mode {
   filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8)) drop-shadow(0 8px 20px rgba(0,0,0,0.6));
 }
 
-/* Páginas apiladas: más delgadas (formato revista, no libro grueso) */
 .notebook-book-wrap::before,
 .notebook-book-wrap::after {
   content: '';
@@ -186,7 +178,6 @@ body.notebook-mode {
   z-index: -1;
 }
 
-/* ── Lomo: GRAPAS de revista en vez de espiral de anillas ──── */
 .notebook-spine {
   position: absolute;
   left: -5px;
@@ -213,7 +204,6 @@ body.notebook-mode {
   background: linear-gradient(to right, rgba(0,0,0,0.2), transparent);
 }
 
-/* Grapa metálica horizontal (formato revista), color plateado como grapa real */
 .notebook-spine-ring {
   width: 7px;
   height: 26px;
@@ -231,7 +221,6 @@ body.notebook-mode {
   margin-bottom: 0;
 }
 
-/* ── Páginas ─────────────────────────────────────────────── */
 .notebook-page-content,
 .notebook-page-flip {
   position: absolute;
@@ -267,7 +256,6 @@ body.notebook-mode {
   z-index: 5;
 }
 
-/* ── Flip ────────────────────────────────────────────────── */
 .notebook-page-flip {
   display: none;
   z-index: 10;
@@ -312,7 +300,6 @@ body.notebook-mode {
   100% { transform: rotateY(0deg); box-shadow: 0 0 0 rgba(0,0,0,0); }
 }
 
-/* ── Mobile ───────────────────────────────────────────────── */
 @media (max-width: 720px) {
   .notebook-topbar {
     padding: 0.45rem 0.7rem;
@@ -348,7 +335,6 @@ body.notebook-mode {
   }
 }
 
-/* ── Aviso de compatibilidad ─────────────────────────────── */
 .notebook-hint {
   position: absolute;
   right: 1.4rem;
@@ -459,7 +445,6 @@ body.notebook-mode {
   }
 }
 
-/* ── Llamar la atención sobre los botones del toolbar ── */
 .btn-notebook,
 .btn-gallery {
   position: relative;
@@ -485,7 +470,6 @@ body.notebook-mode {
   }
 }
 
-/* Anillo expansivo tipo notificación, igual que el ícono de GitHub */
 .btn-notebook::after,
 .btn-gallery::after {
   content: '';
@@ -512,7 +496,6 @@ body.notebook-mode {
   }
 }
 
-/* Al pasar el mouse, se detiene la animación y se resalta más */
 .btn-notebook:hover,
 .btn-gallery:hover {
   animation-play-state: paused;
@@ -524,7 +507,6 @@ body.notebook-mode {
   animation-play-state: paused;
 }
 
-/* Accesibilidad: respeta la preferencia de movimiento reducido */
 @media (prefers-reduced-motion: reduce) {
   .btn-notebook,
   .btn-gallery,
@@ -533,10 +515,6 @@ body.notebook-mode {
     animation: none;
   }
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   ZOOM — solo controles visuales, NO toca layout de la revista
-   ═══════════════════════════════════════════════════════════════ */
 
 .notebook-zoom-controls {
   display: flex;
