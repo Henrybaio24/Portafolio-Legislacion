@@ -1,8 +1,5 @@
 import { pagesWithContainer } from '../utilities/page-data.js';
 
-/**
- * Inicializa el carrusel de imágenes de los apuntes
- */
 export function initCarousel() {
   const carouselOverlay = document.getElementById('carouselOverlay');
   const carouselImg = document.getElementById('carouselImg');
@@ -16,7 +13,6 @@ export function initCarousel() {
 
   if (!carouselOverlay || !carouselImg) return;
 
-  // Recopila imágenes de los apuntes
   const images = [];
   pagesWithContainer
     .filter(p => p.url.includes('apuntes/'))
@@ -51,7 +47,6 @@ export function initCarousel() {
     updateNavState();
   }
 
-  // Habilita/deshabilita los botones según la posición actual
   function updateNavState() {
     const atStart = currentIndex === 0;
     const atEnd = currentIndex === images.length - 1;
@@ -67,18 +62,17 @@ export function initCarousel() {
   }
 
   function prevSlide() {
-    if (currentIndex === 0) return; // ya está en la primera, no hace nada
+    if (currentIndex === 0) return; 
     currentIndex -= 1;
     updateCarousel();
   }
 
   function nextSlide() {
-    if (currentIndex === images.length - 1) return; // ya está en la última, no hace nada
+    if (currentIndex === images.length - 1) return; 
     currentIndex += 1;
     updateCarousel();
   }
 
-  // Event listeners
   btnGallery?.addEventListener('click', () => openCarousel(0));
   carouselPrev?.addEventListener('click', prevSlide);
   carouselNext?.addEventListener('click', nextSlide);
@@ -88,7 +82,6 @@ export function initCarousel() {
     btnTop?.classList.toggle('visible', window.scrollY > 400);
   });
 
-  // Teclado
   document.addEventListener('keydown', (e) => {
     if (!carouselOverlay.classList.contains('active')) return;
     if (e.key === 'ArrowLeft') prevSlide();
