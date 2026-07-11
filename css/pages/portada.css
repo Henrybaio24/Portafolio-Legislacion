@@ -1,8 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   PORTADA — CSS EXCLUSIVO
-   ═══════════════════════════════════════════════════════════════ */
-
-/* ── BLOQUE SUPERIOR OSCURO ── */
 .cover-top {
   background: #1c1018;
   height: 118mm;
@@ -105,7 +100,6 @@
   pointer-events: none; z-index: 1; user-select: none;
 }
 
-/* ── DIVIDER BAND ── */
 .divider-band {
   display: flex;
   align-items: center;
@@ -139,7 +133,6 @@
   color: rgba(184,148,76,.6);
 }
 
-/* ── BLOQUE INFERIOR OSCURO ── */
 .cover-bottom {
   flex: 1;
   background: #1c1018;
@@ -149,7 +142,6 @@
   overflow: hidden;
 }
 
-/* Franja dorada lateral */
 .cover-bottom::before {
   content: '';
   position: absolute; left: 0; top: 0; bottom: 0;
@@ -157,7 +149,6 @@
   background: linear-gradient(180deg, #b8944c, #8a6030, #b8944c);
 }
 
-/* Patrón de fondo sutil */
 .cover-bottom::after {
   content: '';
   position: absolute; inset: 0;
@@ -167,7 +158,6 @@
   pointer-events: none;
 }
 
-/* Marca de agua UCE */
 .watermark {
   position: absolute; right: 6mm; top: 50%;
   transform: translateY(-50%);
@@ -175,7 +165,6 @@
   pointer-events: none; z-index: 0;
 }
 
-/* ── COVER CONTENT (tagline + data-grid) ── */
 .cover-content {
   display: flex;
   flex-direction: row;
@@ -187,7 +176,6 @@
   z-index: 1;
 }
 
-/* ── TAGLINE ── */
 .tagline-area {
   flex: 1;
   padding: 7mm 0 6mm 0;
@@ -214,7 +202,6 @@
   line-height: 1.6; margin: 0;
 }
 
-/* ── DATA GRID ── */
 .data-grid-wrapper {
   flex-shrink: 0;
   width: fit-content;
@@ -284,7 +271,7 @@
 .section-footer-tag {
   font-family: var(--font-sans);
   font-size: 5.5pt; font-weight: 600;
-  color: #b8944c; /* Solo texto dorado, sin background */
+  color: #b8944c; 
   letter-spacing: .1em; text-transform: uppercase;
   display: inline-block; width: fit-content;
 }
