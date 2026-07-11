@@ -1,6 +1,3 @@
-/**
- * Renderiza el índice de página principal (lista con números y puntos)
- */
 export function initIndexPage(tocEntries) {
   const indexList = document.querySelector('.index-list');
   if (!indexList) return;
@@ -15,7 +12,6 @@ export function initIndexPage(tocEntries) {
     </li>
   `).join('');
 
-  // Click para navegar a la sección
   indexList.querySelectorAll('.index-item').forEach(item => {
     item.style.cursor = 'pointer';
     item.addEventListener('click', () => {
