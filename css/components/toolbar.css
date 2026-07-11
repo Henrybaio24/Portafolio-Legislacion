@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   TOOLBAR CON UNIVERSIDAD Y FACULTAD
-   ═══════════════════════════════════════════════════════════════ */
-
 .toolbar {
   position: fixed;
   top: 1.4rem;
@@ -21,7 +17,6 @@
   pointer-events: none;
 }
 
-/* Marca universitaria izquierda */
 .toolbar-brand {
   display: flex;
   flex-direction: column;
@@ -48,7 +43,6 @@
   color: rgba(184, 148, 76, 0.55);
 }
 
-/* Botones derecha */
 .toolbar-actions {
   display: flex;
   align-items: center;
@@ -142,10 +136,6 @@
     justify-content: flex-end;
   }
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   BOTÓN "SUBIR ARRIBA"
-   ═══════════════════════════════════════════════════════════════ */
 
 .btn-top {
   position: fixed;
