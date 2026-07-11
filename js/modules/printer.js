@@ -49,7 +49,6 @@ function printAll() {
   win.document.close();
   win.focus();
 
-  // Esperar fuentes + imágenes antes de imprimir
   setTimeout(() => {
     win.print();
     win.close();
