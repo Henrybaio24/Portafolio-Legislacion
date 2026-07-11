@@ -13,16 +13,11 @@ strong {
   font-weight: 600;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ← NUEVO: Fuente serif para páginas de revista
-   ═══════════════════════════════════════════════════════════════ */
-
 .a4.revista,
 .a4.revista * {
   font-family: var(--font-serif);
 }
 
-/* Excepciones que mantienen su fuente específica */
 .a4.revista .magazine-category span:last-child,
 .a4.revista .section-heading,
 .a4.revista .sidebar-title-custom,
