@@ -204,3 +204,95 @@
   padding-left: 14mm;
   padding-right: 14mm;
 }
+
+
+/* ============================================
+   Variante: imagen única, estilo pieza de galería
+   ============================================ */
+
+.doc-body--single {
+  justify-content: center;
+  align-items: center;
+}
+
+.doc-feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5mm;
+  width: 100%;
+  height: 100%;
+}
+
+.doc-feature-img-wrap {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  max-width: 145mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doc-feature-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 3px;
+  box-shadow:
+    0 1px 0 rgba(184,148,76,.5),
+    0 12px 32px rgba(28,16,24,.16);
+  display: block;
+}
+
+/* Separador fino con estrella dorada, mismo lenguaje del divider-band */
+.doc-feature-divider {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  width: 60%;
+  max-width: 90mm;
+}
+
+.doc-feature-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184,148,76,.5), transparent);
+}
+
+.doc-feature-star {
+  font-size: 8pt;
+  color: #b8944c;
+  flex-shrink: 0;
+}
+
+.doc-feature-caption {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2mm;
+  text-align: center;
+  padding: 0 10mm;
+}
+
+.doc-feature-label {
+  font-family: var(--font-display);
+  font-size: 6.5pt;
+  font-weight: 700;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: #b8944c;
+}
+
+.doc-feature-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 11pt;
+  line-height: 1.5;
+  color: #4a3d35;
+  max-width: 110mm;
+}
