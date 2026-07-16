@@ -1,5 +1,7 @@
 // page-loader.js - Carga las vistas dinámicamente
 
+import { makeIframeLazy } from './lazy-drive.js';
+
 async function loadPage(url, containerId) {
   try {
     const response = await fetch(url);
@@ -26,6 +28,9 @@ async function loadPage(url, containerId) {
           img.setAttribute('src', src.replace(/^(\.\.\/)+/, ''));
         }
       });
+
+      a4.querySelectorAll('iframe[src*="drive.google.com"]').forEach(makeIframeLazy);
+
       document.getElementById(containerId).innerHTML = a4.outerHTML;
     }
   } catch (err) {
@@ -33,5 +38,4 @@ async function loadPage(url, containerId) {
   }
 }
 
-// Exportar para usar en otros archivos
 export { loadPage };

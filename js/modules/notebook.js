@@ -1,7 +1,9 @@
-// notebook.js - Modo Cuaderno 
+// notebook.js - Modo Cuaderno
 
-const NATURAL_W = 793.7008;   
-const NATURAL_H = 1122.5197;  
+import { activateLazyIframesIn } from './lazy-drive.js';
+
+const NATURAL_W = 793.7008;
+const NATURAL_H = 1122.5197;
 const RING_COUNT = 14;
 const HINT_DELAY = 3000;
 
@@ -20,6 +22,9 @@ class Notebook {
     this.touchStartX = null;
     this.initialized = false;
     this.zoom = 1.0;
+
+    // Cache de nodos ya renderizados (index -> elemento DOM con el .a4 y sus iframes/PDF ya cargados)
+    this.nodeCache = new Map();
 
     this._onResize = () => this.showCurrent();
   }
@@ -58,6 +63,9 @@ class Notebook {
         html: clone.outerHTML
       };
     });
+
+    // Nuevo set de páginas -> invalida cualquier nodo cacheado de una sesión anterior
+    this.nodeCache.clear();
   }
 
   buildRings() {
@@ -103,8 +111,8 @@ class Notebook {
     return scale;
   }
 
-  renderInto(node, html, scale) {
-    node.innerHTML = html;
+  // Ajusta solo la escala (CSS transform) de un nodo ya renderizado, sin volver a parsear su HTML.
+  scaleNode(node, scale) {
     const a4 = node.querySelector('.a4');
     if (a4) {
       a4.style.width = `${NATURAL_W}px`;
@@ -113,6 +121,24 @@ class Notebook {
       a4.style.transformOrigin = 'top left';
       a4.style.boxShadow = 'none';
     }
+    return node;
+  }
+
+  // Devuelve el nodo cacheado para esa página (sin recrear el iframe/PDF) o lo crea
+  // una única vez si todavía no existe.
+  getOrRenderNode(index, scale) {
+    let node = this.nodeCache.get(index);
+    if (!node) {
+      node = document.createElement('div');
+      node.className = 'notebook-page-inner';
+      node.innerHTML = this.pages[index].html; // se parsea (y el PDF/iframe se carga) UNA sola vez
+      activateLazyIframesIn(node); // si el PDF de Drive venía diferido, se activa justo ahora
+      this.nodeCache.set(index, node);
+    } else if (node.parentNode) {
+      // Si el nodo ya está montado en otro contenedor (p.ej. seguía en flip), lo liberamos
+      node.parentNode.removeChild(node);
+    }
+    return this.scaleNode(node, scale);
   }
 
   updateChrome() {
@@ -151,9 +177,47 @@ class Notebook {
     if (!this.pages.length) return;
     const baseScale = this.getBaseScale();
     const finalScale = this.applySize(baseScale * this.zoom);
-    this.renderInto(this.els.content, this.pages[this.current].html, finalScale);
+
+    const node = this.getOrRenderNode(this.current, finalScale);
+    this.els.content.innerHTML = '';
+    this.els.content.appendChild(node);
+
     this.buildRings();
     this.updateChrome();
+    this.preloadNeighbors(finalScale);
+  }
+
+  // Precarga silenciosa de la página anterior y siguiente para que el flip sea instantáneo.
+  preloadNeighbors(scale) {
+    [this.current - 1, this.current + 1].forEach(idx => {
+      if (idx < 0 || idx >= this.pages.length) return;
+      if (this.nodeCache.has(idx)) return;
+      // Renderiza en memoria (sin montar en el DOM visible) para disparar la carga del PDF
+      // sin bloquear ni competir por ancho de banda con la página actual.
+      const node = document.createElement('div');
+      node.className = 'notebook-page-inner';
+      node.innerHTML = this.pages[idx].html;
+      activateLazyIframesIn(node);
+      this.scaleNode(node, scale);
+      this.nodeCache.set(idx, node);
+    });
+  }
+
+  // Render "decorativo" y desechable para las caras del flip. No toca el cache:
+  // se descarta al terminar la animación. Es intencional que sea un parseo fresco
+  // (igual que el comportamiento original) para no interferir con el nodo real
+  // que vive en `content`.
+  fillFace(faceEl, index, scale) {
+    faceEl.innerHTML = this.pages[index].html;
+    activateLazyIframesIn(faceEl);
+    const a4 = faceEl.querySelector('.a4');
+    if (a4) {
+      a4.style.width = `${NATURAL_W}px`;
+      a4.style.height = `${NATURAL_H}px`;
+      a4.style.transform = `scale(${scale})`;
+      a4.style.transformOrigin = 'top left';
+      a4.style.boxShadow = 'none';
+    }
   }
 
   flip(direction) {
@@ -175,17 +239,27 @@ class Notebook {
     back.className = 'notebook-face notebook-face-back';
     flipEl.append(front, back);
 
+    // Las caras del flip son decorativas (se descartan al terminar la animación).
     if (direction > 0) {
-      this.renderInto(front, this.pages[this.current].html, finalScale);
-      this.renderInto(back, this.pages[targetIndex].html, finalScale);
+      this.fillFace(front, this.current, finalScale);
+      this.fillFace(back, targetIndex, finalScale);
     } else {
-      this.renderInto(back, this.pages[this.current].html, finalScale);
-      this.renderInto(front, this.pages[targetIndex].html, finalScale);
+      this.fillFace(back, this.current, finalScale);
+      this.fillFace(front, targetIndex, finalScale);
     }
 
+    // El nodo REAL y cacheado del destino (sin recargar el PDF si ya se había visitado).
+    const targetNode = this.getOrRenderNode(targetIndex, finalScale);
+
     if (direction > 0) {
-      this.renderInto(this.els.content, this.pages[targetIndex].html, finalScale);
+      // Igual que el comportamiento original: al avanzar, el contenido de abajo
+      // ya muestra la página destino desde el inicio, para que se "revele" al
+      // girar la hoja en vez de quedar en blanco.
+      this.els.content.innerHTML = '';
+      this.els.content.appendChild(targetNode);
     }
+    // Si direction < 0, dejamos `content` como está (la página actual) y el swap
+    // real ocurre al terminar la animación, igual que en el original.
 
     flipEl.style.transform = direction > 0 ? 'rotateY(0deg)' : 'rotateY(-180deg)';
     flipEl.style.display = 'block';
@@ -201,14 +275,21 @@ class Notebook {
       flipEl.removeEventListener('animationend', onEnd);
       flipEl.style.display = 'none';
       flipEl.classList.remove('flip-next', 'flip-prev');
-      
+
       if (direction < 0) {
-        this.renderInto(this.els.content, this.pages[targetIndex].html, finalScale);
+        // Recién ahora movemos el nodo real y cacheado al contenedor principal.
+        this.els.content.innerHTML = '';
+        this.els.content.appendChild(targetNode);
       }
-      
+
+      // Libera las caras decorativas (sus iframes, si los hay, se descartan).
+      front.innerHTML = '';
+      back.innerHTML = '';
+
       this.current = targetIndex;
       this.updateChrome();
       this.animating = false;
+      this.preloadNeighbors(finalScale);
     };
     flipEl.addEventListener('animationend', onEnd);
   }
@@ -252,6 +333,9 @@ class Notebook {
     this.els.bookWrap.style.width = '';
     this.els.bookWrap.style.height = '';
     window.removeEventListener('resize', this._onResize);
+
+    // Libera los PDFs/iframes cargados; la próxima apertura los recargará bajo demanda.
+    this.nodeCache.clear();
 
     clearTimeout(this.hintTimeout);
     this.hideHint();

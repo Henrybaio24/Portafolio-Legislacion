@@ -12,11 +12,12 @@ import { initScrollRestore } from './utilities/scroll-restore.js';
 import { pagesWithContainer } from './utilities/page-data.js';
 import { renderPageSlots, generateTocEntries } from './utilities/page-numbering.js';
 import { actualizarFecha } from './modules/date.js';
+import { observeLazyIframes } from './modules/lazy-drive.js';
 
 // Inicialización inmediata
 initNotebook();
 initWelcomeAvatar();
-initIntro(); 
+initIntro();
 initScrollTop();
 initToolbarAutoHide();
 renderPageSlots();
@@ -31,4 +32,6 @@ Promise.all(
   initCarousel();
   initScrollRestore();
   actualizarFecha();
+
+  observeLazyIframes();
 });
